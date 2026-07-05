@@ -1,1 +1,0 @@
-# solomonopoly.github.io
