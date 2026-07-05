@@ -1,0 +1,1650 @@
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>QUEEN MODE — Atelier of Romantic Couture</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,700&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.css" />
+
+<style>
+:root{
+  --bone:        #f4ecdf;
+  --parchment:   #ece2d0;
+  --ivory:       #f8f2e6;
+  --bg-ophelia:  #e8dfd1;
+  --bg-seraphim: #d9c2a8;
+  --bg-vesper:   #b9c7b6;
+  --bg-rosalind: #c98d7d;
+  --ink:         #1f1a17;
+  --ink-soft:    #3a3128;
+  --oxblood:     #6e1f24;
+  --bordeaux:    #4a181c;
+  --gilt:        #b08442;
+  --gilt-light:  #d4ad6c;
+  --emerald:     #2e3a2c;
+  --rouge:       #b05552;
+  --hairline:    rgba(31,26,23,.18);
+  --hairline-2:  rgba(31,26,23,.35);
+  --display:  'Playfair Display', serif;
+  --serif:    'Cormorant Garamond', serif;
+  --italic:   'EB Garamond', serif;
+  --sans:     'Manrope', sans-serif;
+  --pad: clamp(1rem, 3vw, 2.4rem);
+}
+*,*::before,*::after{ box-sizing: border-box; }
+html{ scroll-behavior: smooth; }
+body{
+  margin:0; background: var(--bone); color: var(--ink);
+  font-family: var(--serif); font-size: 16px; line-height: 1.55; overflow-x: hidden;
+  background-image:
+    radial-gradient(rgba(31,26,23,.025) 1px, transparent 1px),
+    radial-gradient(rgba(31,26,23,.02)  1px, transparent 1px);
+  background-size: 3px 3px, 7px 7px;
+  background-position: 0 0, 1px 1px;
+}
+img{ max-width:100%; display:block; }
+a{ color: inherit; text-decoration: none; }
+h1,h2,h3,h4,p{ margin:0; }
+ul{ margin:0; padding:0; list-style:none; }
+
+.l-header{ position: sticky; top: 0; z-index: 95; background: var(--bone); border-bottom: 1px solid var(--hairline); transition: background .6s ease; }
+.nav{ display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 18px var(--pad); gap: 1rem; }
+.nav-left, .nav-right{ display:flex; align-items:center; gap:28px; }
+.nav-right{ justify-content:flex-end; }
+.nav-link{ font-family: var(--sans); font-weight: 500; font-size: 11px; letter-spacing: .28em; text-transform: uppercase; color: var(--ink-soft); padding: 6px 0; position: relative; transition: color .3s; }
+.nav-link::after{ content:""; position:absolute; left:0; right:0; bottom:0; height:1px; background: var(--ink); transform: scaleX(0); transform-origin: left; transition: transform .4s ease; }
+.nav-link:hover{ color: var(--ink); }
+.nav-link:hover::after{ transform: scaleX(1); }
+.nav-logo{ text-align: center; font-family: var(--display); font-weight: 500; font-style: italic; font-size: clamp(22px, 2.2vw, 30px); letter-spacing: .06em; color: var(--ink); line-height: 1; }
+.nav-logo small{ display:block; font-family: var(--sans); font-weight: 600; font-size: 8.5px; letter-spacing: .42em; text-transform: uppercase; color: var(--gilt); margin-top: 4px; font-style: normal; }
+.nav-icon{ width: 18px; height: 18px; cursor: pointer; transition: transform .3s, color .3s; }
+.nav-icon:hover{ transform: translateY(-2px); color: var(--oxblood); }
+.nav-icon-btn{ background: none; border: 0; padding: 0; cursor: pointer; color: var(--ink); display: grid; place-items: center; }
+.cart-pill{ display:inline-flex; align-items:center; gap:10px; font-family: var(--sans); font-size: 11px; letter-spacing: .22em; text-transform: uppercase; border: 1px solid var(--hairline-2); padding: 8px 14px; border-radius: 999px; transition: all .3s; background: transparent; color: var(--ink); cursor: pointer; }
+.cart-pill:hover{ background: var(--ink); color: var(--bone); border-color: var(--ink); }
+.cart-pill .count{ background: var(--oxblood); color: var(--bone); border-radius: 50%; width: 18px; height: 18px; display: grid; place-items: center; font-size: 9px; font-weight: 700; }
+@media (max-width: 900px){ .nav-left .nav-link:nth-child(n+3){ display:none; } .nav-right .cart-pill .label{ display:none; } }
+@media (max-width: 600px){ .nav-left .nav-link{ display:none; } .nav-left::before{ content:"☰"; font-size: 22px; cursor:pointer; } }
+
+.hero{ position: relative; padding: 0 var(--pad); }
+.hero-frame{ position: relative; margin: 0 auto; max-width: 1340px; height: min(720px, calc(100vh - 140px)); min-height: 580px; border: 1px solid var(--hairline); background: var(--bg-ophelia); transition: background 1.1s cubic-bezier(.22,.61,.36,1); overflow: hidden; }
+body[data-sld="0"] .hero-frame{ background: var(--bg-ophelia); }
+body[data-sld="1"] .hero-frame{ background: var(--bg-seraphim); }
+body[data-sld="2"] .hero-frame{ background: var(--bg-vesper); }
+body[data-sld="3"] .hero-frame{ background: var(--bg-rosalind); }
+.hero-frame::before, .hero-frame::after{ content:""; position: absolute; width: 70px; height: 70px; border: 1px solid var(--ink-soft); opacity: .35; pointer-events: none; }
+.hero-frame::before{ top: 18px; left: 18px;  border-right:none; border-bottom:none; }
+.hero-frame::after { bottom:18px; right:18px; border-left:none;  border-top:none; }
+.hero-eyebrow{ position: absolute; top: 36px; left: 50%; transform: translateX(-50%); font-family: var(--sans); font-size: 10px; letter-spacing: .5em; text-transform: uppercase; color: var(--ink-soft); z-index: 4; display: flex; align-items: center; gap: 14px; }
+.hero-eyebrow .rule{ width: 38px; height: 1px; background: var(--ink-soft); opacity:.5; }
+.swiper.heroSwiper{ height: 100%; overflow: hidden; }
+.swiper-wrapper{ height: 100%; }
+.slide{ display: grid; grid-template-columns: 1fr 1fr; align-items: center; height: 100%; padding: 80px 80px 70px; position: relative; opacity: 0 !important; transition: opacity .6s; }
+.slide.swiper-slide-active{ opacity: 1 !important; }
+.slide-text{ max-width: 460px; position: relative; z-index: 3; }
+.slide-collection{ font-family: var(--sans); font-size: 11px; letter-spacing: .42em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 18px; display:flex; align-items:center; gap:14px; }
+.slide-collection::before{ content:""; width: 32px; height: 1px; background: var(--ink-soft); }
+.slide-title{ font-family: var(--display); font-style: italic; font-weight: 400; font-size: clamp(56px, 7vw, 104px); line-height: .92; letter-spacing: -.01em; color: var(--ink); margin-bottom: 14px; }
+.slide-title .ampersand{ font-family: var(--italic); color: var(--oxblood); font-size: .85em; display: inline-block; transform: translateY(-.05em); }
+.slide-tagline{ font-family: var(--italic); font-style: italic; font-size: 22px; color: var(--ink-soft); margin-bottom: 36px; letter-spacing: .01em; }
+.slide-price{ display: inline-flex; align-items: baseline; gap: 12px; font-family: var(--sans); font-size: 13px; letter-spacing: .25em; text-transform: uppercase; color: var(--ink-soft); border-top: 1px solid var(--hairline-2); border-bottom: 1px solid var(--hairline-2); padding: 10px 18px; margin-bottom: 30px; }
+.slide-price strong{ font-family: var(--display); font-style: italic; font-weight: 500; font-size: 22px; color: var(--ink); letter-spacing: 0; }
+.slide-desc{ font-family: var(--serif); font-size: 15.5px; line-height: 1.65; color: var(--ink-soft); margin-bottom: 14px; max-width: 380px; }
+.slide-desc::first-letter{ font-family: var(--display); font-size: 46px; float: left; line-height: 1; padding: 6px 12px 4px; margin: 4px 12px 0 0; background: var(--ink); color: var(--bone); font-weight: 500; }
+.slide-meta{ font-family: var(--italic); font-style: italic; font-size: 13px; color: var(--ink-soft); opacity: .75; margin-bottom: 32px; }
+.slide-cta{ display: inline-flex; align-items: center; gap: 14px; font-family: var(--sans); font-size: 11px; letter-spacing: .32em; text-transform: uppercase; color: var(--ink); font-weight: 600; cursor: pointer; position: relative; }
+.slide-cta .arrow{ width: 38px; height: 1px; background: var(--ink); position: relative; transition: width .35s ease; }
+.slide-cta .arrow::after{ content:""; position: absolute; right: 0; top: -3px; width: 7px; height: 7px; border-top: 1px solid var(--ink); border-right: 1px solid var(--ink); transform: rotate(45deg); }
+.slide-cta:hover .arrow{ width: 60px; }
+.slide-display{ position: relative; display: grid; place-items: center; height: 100%; }
+.dress-stage{ position: relative; width: 340px; height: 480px; }
+.dress-bg{ position: absolute; inset: 0; border-radius: 200px 200px 200px 200px; background-size: cover; background-position: center; filter: saturate(.85) contrast(.95); box-shadow: 0 40px 80px -30px rgba(31,26,23,.35); }
+.slide.swiper-slide-active .dress-bg{ animation: bgFade 1.2s cubic-bezier(.22,.61,.36,1); }
+@keyframes bgFade{ from{ opacity:0; transform: scale(1.04); } to{ opacity:1; transform: scale(1); } }
+.dress-img{ position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; transform: scale(1.18) translateY(-2%); filter: drop-shadow(0 30px 40px rgba(31,26,23,.35)); opacity: 0; transition: opacity .9s .15s, transform 1.1s .15s cubic-bezier(.22,.61,.36,1); }
+.slide.swiper-slide-active .dress-img{ opacity: 1; transform: scale(1.22) translateY(-3%); }
+.slide-decor{ position: absolute; inset: 0; pointer-events: none; }
+.pantone{ position: absolute; display: flex; align-items: center; flex-direction: row; gap: 12px; font-family: var(--sans); font-size: 8px; letter-spacing: .2em; text-transform: uppercase; color: var(--ink-soft); top: auto !important; bottom: 38px !important; left: 60% !important; right: auto !important; transform: translateX(-50%); z-index: 4; background: rgba(244,236,223,.75); padding: 8px 14px; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); border: 1px solid var(--hairline); }
+.pantone .row{ display:flex; gap: 4px; }
+.pantone .chip{ width: 14px; height: 14px; border:1px solid var(--hairline-2); }
+.pantone .label{ opacity:.7; font-size: 8px; letter-spacing: .35em; white-space: nowrap; }
+.slide-no{ position: absolute; font-family: var(--display); font-style: italic; font-weight: 500; font-size: 220px; line-height: .8; color: var(--ink); opacity: .07; pointer-events: none; user-select: none; }
+.slide-no.tl{ top: 60px; left: 12%; }
+.slide-no.br{ bottom: 30px; right: 4%; }
+.slide-ribbon{ position: absolute; top: 50%; left: 36px; transform: translateY(-50%) rotate(180deg); writing-mode: vertical-rl; transform-origin: center center; font-family: var(--sans); font-size: 9px; letter-spacing: .55em; text-transform: uppercase; color: var(--ink-soft); white-space: nowrap; opacity: .55; z-index: 2; pointer-events: none; }
+.slide-ribbon::before{ content: none; }
+.fragment{ position: absolute; width: 90px; height: 110px; overflow: hidden; filter: grayscale(100%) contrast(1.05); border: 1px solid var(--hairline-2); mix-blend-mode: multiply; opacity: 0; transition: opacity .8s .4s, transform .8s .4s ease; transform: translateY(20px); }
+.slide.swiper-slide-active .fragment{ opacity: .85; transform: translateY(0); }
+.fragment img{ width: 100%; height: 100%; object-fit: cover; }
+.fragment.f-1{ top: 110px; right: 5%; transform: rotate(3deg) translateY(20px); width: 130px; height: 160px; }
+.slide.swiper-slide-active .fragment.f-1{ transform: rotate(3deg); }
+.fragment.f-2{ bottom: 110px; left: 47%; width: 100px; height: 130px; transform: rotate(-4deg) translateY(20px); }
+.slide.swiper-slide-active .fragment.f-2{ transform: rotate(-4deg); }
+.hero-controls{ position: absolute; bottom: 38px; right: 40px; display: flex; align-items: center; gap: 14px; z-index: 5; }
+.swiper-btn{ width: 50px; height: 50px; border-radius: 50%; border: 1px solid var(--ink); background: transparent; display: grid; place-items: center; cursor: pointer; transition: all .35s ease; color: var(--ink); }
+.swiper-btn:hover{ background: var(--ink); color: var(--bone); }
+.swiper-btn svg{ width: 22px; height: 22px; }
+.swiper-btn.prev svg{ transform: rotate(180deg); }
+.hero-pagination{ position: absolute; bottom: 50px; left: 50px; font-family: var(--display); font-style: italic; font-size: 13px; letter-spacing: .15em; color: var(--ink-soft); z-index: 5; }
+.hero-pagination .swiper-pagination-current{ font-size: 24px; color: var(--ink); font-weight: 500; margin-right: 2px; }
+.hero-pagination .swiper-pagination-total{ opacity: .55; margin-left: 2px; }
+.hero-pagination .sep{ margin: 0 4px; opacity: .55; }
+.slide .slide-text > *, .slide .pantone, .slide .slide-meta{ opacity: 0; transform: translateY(-22px); transition: opacity .9s ease, transform .9s ease; }
+.slide.swiper-slide-active .slide-text > *, .slide.swiper-slide-active .pantone, .slide.swiper-slide-active .slide-meta{ opacity: 1; transform: none; }
+.slide.swiper-slide-active .slide-collection{ transition-delay: .15s; }
+.slide.swiper-slide-active .slide-title     { transition-delay: .25s; }
+.slide.swiper-slide-active .slide-tagline   { transition-delay: .35s; }
+.slide.swiper-slide-active .slide-price     { transition-delay: .42s; }
+.slide.swiper-slide-active .slide-desc      { transition-delay: .50s; }
+.slide.swiper-slide-active .slide-meta      { transition-delay: .56s; }
+.slide.swiper-slide-active .slide-cta       { transition-delay: .62s; }
+@media (max-width: 1024px){
+  .slide{ padding: 80px 50px 80px; }
+  .slide-no{ font-size: 160px; }
+  .dress-stage{ width: 300px; height: 430px; }
+  .slide-title{ font-size: clamp(56px, 8vw, 96px); }
+  .pantone{ left: 60px !important; bottom: 96px !important; }
+}
+@media (max-width: 820px){
+  .hero{ padding: 0 12px; }
+  .hero-frame{ height: auto; min-height: 0; }
+  .swiper.heroSwiper{ height: auto; }
+  .slide{ grid-template-columns: 1fr; padding: 56px 24px 90px; gap: 18px; height: calc(100dvh - 100px); min-height: 520px; max-height: 760px; align-content: start; align-items: start; }
+  .slide-display{ height: auto; flex-shrink: 0; order: -1; margin-bottom: 4px; }
+  .dress-stage{ width: clamp(180px, 56vw, 240px); height: clamp(260px, 78vw, 340px); }
+  .slide-ribbon, .fragment, .pantone{ display: none !important; }
+  .slide-text{ text-align: left; max-width: 100%; align-self: start; }
+  .slide-collection{ font-size: 9.5px; margin-bottom: 12px; }
+  .slide-title{ font-size: clamp(46px, 13vw, 72px); margin-bottom: 8px; }
+  .slide-tagline{ font-size: 16px; margin-bottom: 14px; }
+  .slide-price{ padding: 7px 14px; margin-bottom: 16px; font-size: 11px; }
+  .slide-price strong{ font-size: 17px; }
+  .slide-desc{ display: none; }
+  .slide-meta{ display: none; }
+  .slide-cta{ font-size: 10px; }
+  .slide-no.tl{ top: 14px; left: 22px; font-size: 90px; opacity: .06; }
+  .slide-no.br{ display: none; }
+  .hero-controls{ bottom: 18px; right: 16px; gap: 10px; }
+  .hero-controls .swiper-btn{ width: 40px; height: 40px; }
+  .hero-pagination{ left: 22px; bottom: 26px; font-size: 11px; }
+  .hero-pagination .swiper-pagination-current{ font-size: 20px; }
+  .hero-eyebrow{ font-size: 8px; top: 18px; letter-spacing: .35em; }
+  .hero-eyebrow .rule{ width: 22px; }
+  .hero-frame::before, .hero-frame::after{ width: 36px; height: 36px; top: 10px; left: 10px; }
+  .hero-frame::after{ top: auto; bottom: 10px; left: auto; right: 10px; }
+}
+
+.collection{ padding: 110px var(--pad) 80px; }
+.collection-head{ display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 60px; border-bottom: 1px solid var(--hairline); padding-bottom: 28px; max-width: 1340px; margin-left:auto; margin-right:auto; }
+.collection-head .eyebrow{ font-family: var(--sans); font-size: 11px; letter-spacing: .42em; text-transform: uppercase; color: var(--gilt); }
+.collection-head h2{ font-family: var(--display); font-style: italic; font-weight: 400; font-size: clamp(42px, 5vw, 70px); line-height: 1; margin-top: 12px; color: var(--ink); }
+.collection-head .read{ font-family: var(--italic); font-style: italic; font-size: 14px; color: var(--ink-soft); border-bottom: 1px solid var(--ink-soft); padding-bottom: 3px; }
+.collection-grid{ max-width: 1340px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+.collection-card{ position: relative; aspect-ratio: 4/5; overflow: hidden; background: var(--parchment); cursor: pointer; }
+.collection-card img{ width: 100%; height: 100%; object-fit: cover; transition: transform 1.4s cubic-bezier(.22,.61,.36,1), filter .8s; filter: grayscale(15%) sepia(8%); }
+.collection-card:hover img{ transform: scale(1.06); filter: grayscale(0) sepia(0); }
+.collection-card .meta{ position: absolute; inset: auto 0 0 0; padding: 28px 32px; background: linear-gradient(to top, rgba(31,26,23,.78), transparent); color: var(--bone); display: flex; justify-content: space-between; align-items: flex-end; }
+.collection-card .meta h3{ font-family: var(--display); font-style: italic; font-weight: 500; font-size: 32px; line-height: 1; }
+.collection-card .meta small{ display:block; font-family: var(--sans); font-size: 9.5px; letter-spacing: .42em; text-transform: uppercase; margin-bottom: 6px; opacity: .75; }
+.collection-card .meta .arrow{ font-family: var(--display); font-size: 22px; font-style: italic; transform: translateY(2px); transition: transform .35s; }
+.collection-card:hover .meta .arrow{ transform: translate(8px, 2px); }
+.collection-card .tag{ position: absolute; top: 22px; left: 22px; font-family: var(--sans); font-size: 9.5px; letter-spacing: .35em; text-transform: uppercase; background: var(--bone); color: var(--ink); padding: 6px 12px; border: 1px solid var(--ink); }
+@media (max-width: 760px){ .collection-grid{ grid-template-columns: 1fr; } .collection-head{ flex-direction: column; align-items:flex-start; gap: 18px; } }
+
+.marquee-band{ background: var(--ink); color: var(--bone); padding: 26px 0; overflow: hidden; border-top: 1px solid var(--gilt); border-bottom: 1px solid var(--gilt); }
+.marquee-band .track{ display: flex; gap: 60px; white-space: nowrap; font-family: var(--display); font-style: italic; font-size: 38px; letter-spacing: .02em; animation: scroll 40s linear infinite; }
+.marquee-band .track span::before{ content:"❦"; color: var(--gilt-light); margin-right: 60px; font-style: normal; }
+@keyframes scroll{ from{ transform: translateX(0); } to{ transform: translateX(-50%); } }
+
+.featured{ padding: 110px var(--pad) 60px; position: relative; }
+.featured-head{ max-width: 1340px; margin: 0 auto 56px; text-align: center; position: relative; }
+.featured-head .eyebrow{ font-family: var(--sans); font-size: 11px; letter-spacing: .55em; text-transform: uppercase; color: var(--gilt); margin-bottom: 14px; }
+.featured-head h2{ font-family: var(--display); font-style: italic; font-weight: 400; font-size: clamp(40px, 5vw, 62px); color: var(--ink); line-height: 1; }
+.featured-head .sub{ font-family: var(--italic); font-style: italic; color: var(--ink-soft); margin-top: 12px; font-size: 15px; }
+.featured-head::before, .featured-head::after{ content:""; position: absolute; top: 50%; width: 60px; height: 1px; background: var(--hairline-2); }
+.featured-head::before{ left: 14%; }
+.featured-head::after { right: 14%; }
+@media (max-width: 760px){ .featured-head::before, .featured-head::after{ display:none; } }
+.featured-grid{ max-width: 1340px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; }
+.product{ position: relative; cursor: pointer; }
+.product .frame{ position: relative; aspect-ratio: 3/4; overflow: hidden; background: var(--parchment); margin-bottom: 18px; }
+.product .frame img{ width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s ease, filter .6s; }
+.product:hover .frame img{ transform: scale(1.05); }
+.product .badge{ position: absolute; top: 14px; left: 14px; font-family: var(--sans); font-size: 9px; letter-spacing: .4em; text-transform: uppercase; padding: 5px 10px; background: var(--ink); color: var(--bone); z-index: 2; }
+.product .badge.couture{ background: var(--oxblood); }
+.product .badge.archive{ background: var(--emerald); }
+.product .quick{ position: absolute; inset: auto 14px 14px 14px; background: var(--bone); color: var(--ink); font-family: var(--sans); font-size: 10px; letter-spacing: .35em; text-transform: uppercase; padding: 12px; text-align: center; transform: translateY(120%); transition: transform .5s cubic-bezier(.22,.61,.36,1); border: 1px solid var(--ink); }
+.product:hover .quick{ transform: translateY(0); }
+.product h3{ font-family: var(--display); font-style: italic; font-weight: 500; font-size: 19px; color: var(--ink); margin-bottom: 4px; }
+.product .row2{ display:flex; justify-content: space-between; align-items:center; font-family: var(--sans); font-size: 11px; letter-spacing: .12em; color: var(--ink-soft); }
+.product .price{ font-family: var(--display); font-size: 16px; color: var(--ink); letter-spacing: 0; }
+@media (max-width: 980px){ .featured-grid{ grid-template-columns: repeat(2, 1fr); } }
+
+.editorial{ padding: 70px var(--pad); }
+.editorial-frame{ max-width: 1340px; margin: 0 auto; background: linear-gradient(rgba(31,26,23,.55), rgba(31,26,23,.7)), url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=2000&auto=format&fit=crop') center/cover; padding: clamp(60px, 9vw, 130px) clamp(30px, 6vw, 80px); position: relative; color: var(--bone); overflow: hidden; border: 1px solid var(--gilt); }
+.editorial-frame::before{ content:"VOL. III"; position: absolute; top: 30px; right: 40px; font-family: var(--sans); font-size: 11px; letter-spacing: .5em; color: var(--gilt-light); }
+.editorial-frame::after{ content:""; position: absolute; inset: 16px; border: 1px solid rgba(244,236,223,.18); pointer-events: none; }
+.editorial-frame .eyebrow{ font-family: var(--sans); font-size: 11px; letter-spacing: .55em; text-transform: uppercase; color: var(--gilt-light); margin-bottom: 18px; }
+.editorial-frame h2{ font-family: var(--display); font-style: italic; font-weight: 400; font-size: clamp(48px, 7vw, 96px); line-height: .95; max-width: 720px; margin-bottom: 22px; }
+.editorial-frame h2 em{ font-style: italic; color: var(--gilt-light); }
+.editorial-frame p{ font-family: var(--italic); font-style: italic; font-size: 18px; max-width: 480px; opacity: .85; margin-bottom: 36px; }
+.editorial-cta{ display: inline-flex; align-items: center; gap: 14px; font-family: var(--sans); font-size: 11px; letter-spacing: .4em; text-transform: uppercase; color: var(--bone); padding: 16px 28px; border: 1px solid var(--gilt-light); transition: all .4s; }
+.editorial-cta:hover{ background: var(--gilt); color: var(--ink); border-color: var(--gilt); }
+
+.arrivals{ padding: 90px var(--pad) 70px; }
+.arrivals-grid{ max-width: 1340px; margin: 40px auto 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+.arrival-card{ position: relative; overflow: hidden; background: var(--parchment); cursor: pointer; }
+.arrival-card.tall   { grid-row: span 2; aspect-ratio: 3/5; }
+.arrival-card.regular{ aspect-ratio: 3/4; }
+.arrival-card img{ width:100%; height:100%; object-fit: cover; transition: transform 1.4s cubic-bezier(.22,.61,.36,1); }
+.arrival-card:hover img{ transform: scale(1.07); }
+.arrival-card .overlay{ position: absolute; inset: 0; background: rgba(110,31,36,0); display: grid; place-items: center; transition: background .5s; }
+.arrival-card:hover .overlay{ background: rgba(110,31,36,.32); }
+.arrival-card .button{ font-family: var(--sans); font-size: 10px; letter-spacing: .42em; text-transform: uppercase; color: var(--bone); background: var(--ink); padding: 14px 22px; opacity: 0; transform: translateY(10px); transition: opacity .5s, transform .5s; border: 1px solid var(--bone); }
+.arrival-card:hover .button{ opacity:1; transform: translateY(0); }
+.arrival-card .info{ position: absolute; top: 18px; left: 18px; font-family: var(--sans); font-size: 9.5px; letter-spacing: .35em; text-transform: uppercase; color: var(--bone); background: var(--ink); padding: 5px 10px; }
+.arrival-card .info.dark{ background: var(--bone); color: var(--ink); }
+@media (max-width: 900px){ .arrivals-grid{ grid-template-columns: repeat(2,1fr); } .arrival-card.tall{ grid-row: span 1; aspect-ratio: 3/4; } }
+@media (max-width: 540px){ .arrivals-grid{ grid-template-columns: 1fr; } }
+
+.heritage{ background: var(--ink); color: var(--bone); padding: 100px var(--pad); position: relative; }
+.heritage-inner{ max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.heritage-img{ position: relative; aspect-ratio: 4/5; overflow: hidden; border: 1px solid var(--gilt); }
+.heritage-img::after{ content:""; position: absolute; inset: 12px; border: 1px solid rgba(244,236,223,.2); pointer-events: none; }
+.heritage-img img{ width:100%; height:100%; object-fit: cover; filter: sepia(20%) contrast(1.05); }
+.heritage-text .eyebrow{ font-family: var(--sans); font-size: 11px; letter-spacing: .55em; text-transform: uppercase; color: var(--gilt-light); margin-bottom: 20px; }
+.heritage-text h2{ font-family: var(--display); font-style: italic; font-weight: 400; font-size: clamp(38px, 4.5vw, 58px); line-height: 1.05; margin-bottom: 26px; }
+.heritage-text p{ font-family: var(--serif); font-size: 16.5px; line-height: 1.7; color: rgba(244,236,223,.78); margin-bottom: 18px; }
+.heritage-text p::first-letter{ font-family: var(--display); font-size: 56px; line-height: 1; float: left; padding: 8px 14px 4px; margin: 4px 14px 0 0; color: var(--gilt-light); background: rgba(244,236,223,.05); border: 1px solid var(--gilt); }
+.heritage-sig{ margin-top: 30px; font-family: var(--display); font-style: italic; font-size: 26px; color: var(--gilt-light); }
+.heritage-sig small{ display: block; font-family: var(--sans); font-size: 9.5px; letter-spacing: .42em; text-transform: uppercase; color: rgba(244,236,223,.6); margin-top: 4px; font-style: normal; }
+@media (max-width: 820px){ .heritage-inner{ grid-template-columns: 1fr; gap: 50px; } }
+
+.newsletter{ padding: 110px var(--pad); text-align: center; background: var(--parchment); position: relative; overflow: hidden; }
+.newsletter::before, .newsletter::after{ content:""; position: absolute; top: 50%; transform: translateY(-50%); width: 18%; height: 1px; background: var(--hairline-2); }
+.newsletter::before{ left: 6%; }
+.newsletter::after { right: 6%; }
+.newsletter .eyebrow{ font-family: var(--sans); font-size: 11px; letter-spacing: .55em; text-transform: uppercase; color: var(--gilt); margin-bottom: 18px; }
+.newsletter h2{ font-family: var(--display); font-style: italic; font-weight: 400; font-size: clamp(38px, 5vw, 58px); margin-bottom: 14px; color: var(--ink); }
+.newsletter p{ font-family: var(--italic); font-style: italic; font-size: 16px; color: var(--ink-soft); margin: 0 auto 36px; max-width: 480px; }
+.newsletter form{ max-width: 520px; margin: 0 auto; display: flex; border: 1px solid var(--ink); background: var(--bone); }
+.newsletter input{ flex: 1; border: 0; background: transparent; padding: 18px 22px; font-family: var(--italic); font-style: italic; font-size: 15px; color: var(--ink); outline: none; }
+.newsletter input::placeholder{ color: var(--ink-soft); opacity: .6; }
+.newsletter button{ border: 0; background: var(--ink); color: var(--bone); font-family: var(--sans); font-size: 11px; letter-spacing: .4em; text-transform: uppercase; padding: 0 30px; cursor: pointer; transition: background .3s; }
+.newsletter button:hover{ background: var(--oxblood); }
+
+.footer{ background: var(--ink); color: var(--bone); padding: 90px var(--pad) 30px; position: relative; }
+.footer-inner{ max-width: 1340px; margin: 0 auto; display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 50px; padding-bottom: 60px; border-bottom: 1px solid rgba(244,236,223,.15); }
+.footer-brand h3{ font-family: var(--display); font-style: italic; font-size: 30px; margin-bottom: 12px; }
+.footer-brand small{ display: block; font-family: var(--sans); font-size: 9.5px; letter-spacing: .42em; text-transform: uppercase; color: var(--gilt-light); margin-bottom: 18px; }
+.footer-brand p{ font-family: var(--italic); font-style: italic; font-size: 14px; color: rgba(244,236,223,.7); max-width: 280px; line-height: 1.6; }
+.footer-col h4{ font-family: var(--sans); font-size: 10px; letter-spacing: .42em; text-transform: uppercase; color: var(--gilt-light); margin-bottom: 22px; }
+.footer-col ul li{ margin-bottom: 12px; }
+.footer-col ul a{ font-family: var(--serif); font-size: 15px; color: rgba(244,236,223,.78); transition: color .3s; }
+.footer-col ul a:hover{ color: var(--gilt-light); }
+.footer-bottom{ max-width: 1340px; margin: 30px auto 0; display: flex; justify-content: space-between; align-items: center; font-family: var(--sans); font-size: 10px; letter-spacing: .3em; text-transform: uppercase; color: rgba(244,236,223,.5); }
+.footer-bottom .socials{ display: flex; gap: 22px; }
+.footer-bottom a:hover{ color: var(--gilt-light); }
+@media (max-width: 820px){ .footer-inner{ grid-template-columns: 1fr 1fr; } .footer-bottom{ flex-direction: column; gap: 18px; text-align: center; } }
+@media (max-width: 480px){ .footer-inner{ grid-template-columns: 1fr; } }
+
+.page{ display: none; opacity: 0; transition: opacity .5s ease; }
+.page.active{ display: block; opacity: 1; }
+.page.entering{ opacity: 0; }
+.page-header{ padding: 90px var(--pad) 50px; text-align: center; border-bottom: 1px solid var(--hairline); position: relative; }
+.page-header .eyebrow{ font-family: var(--sans); font-size: 11px; letter-spacing: .55em; text-transform: uppercase; color: var(--gilt); margin-bottom: 14px; }
+.page-header h1{ font-family: var(--display); font-style: italic; font-weight: 400; font-size: clamp(56px, 7vw, 96px); line-height: 1; color: var(--ink); margin-bottom: 14px; }
+.page-header p{ font-family: var(--italic); font-style: italic; font-size: 17px; color: var(--ink-soft); max-width: 580px; margin: 0 auto; }
+.page-header::before, .page-header::after{ content: ""; position: absolute; bottom: -1px; width: 12px; height: 12px; background: var(--gilt); border-radius: 50%; transform: translateY(50%); }
+.page-header::before{ left: 12%; }
+.page-header::after{ right: 12%; }
+.nav-link.active-link{ color: var(--ink); }
+.nav-link.active-link::after{ transform: scaleX(1); }
+
+.atelier-letter{ max-width: 1200px; margin: 80px auto; padding: 0 var(--pad); }
+.letter-inner{ display: grid; grid-template-columns: 0.85fr 1fr; gap: 70px; align-items: start; }
+.letter-portrait{ position: sticky; top: 110px; }
+.letter-portrait img{ width: 100%; aspect-ratio: 4/5; object-fit: cover; filter: sepia(15%) contrast(1.05); border: 1px solid var(--hairline); }
+.portrait-cap{ font-family: var(--italic); font-style: italic; font-size: 12.5px; color: var(--ink-soft); margin-top: 14px; letter-spacing: .02em; }
+.letter-body .eyebrow{ font-family: var(--sans); font-size: 11px; letter-spacing: .55em; text-transform: uppercase; color: var(--gilt); margin-bottom: 16px; }
+.letter-body h2{ font-family: var(--display); font-style: italic; font-weight: 400; font-size: clamp(32px, 3.4vw, 44px); line-height: 1.15; color: var(--ink); margin-bottom: 30px; }
+.letter-body p{ font-family: var(--serif); font-size: 17px; line-height: 1.75; color: var(--ink-soft); margin-bottom: 22px; }
+.letter-body p:first-of-type::first-letter{ font-family: var(--display); font-size: 56px; line-height: 1; float: left; padding: 8px 14px 4px; margin: 4px 14px 0 0; color: var(--bone); background: var(--ink); }
+.letter-body .signoff{ font-family: var(--italic); font-style: italic; font-size: 19px; color: var(--ink); margin-top: 30px; margin-bottom: 18px; }
+.letter-body .heritage-sig{ font-family: var(--display); font-style: italic; font-size: 28px; color: var(--gilt); margin-top: 14px; }
+.letter-body .heritage-sig small{ display: block; font-family: var(--sans); font-size: 9.5px; letter-spacing: .42em; text-transform: uppercase; color: var(--ink-soft); margin-top: 6px; font-style: normal; }
+@media (max-width: 820px){ .letter-inner{ grid-template-columns: 1fr; gap: 40px; } .letter-portrait{ position: static; max-width: 360px; } }
+
+.atelier-numbers{ background: var(--ink); color: var(--bone); padding: 70px var(--pad); border-top: 1px solid var(--gilt); border-bottom: 1px solid var(--gilt); }
+.num-grid{ max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 50px; text-align: center; }
+.num-card .big{ font-family: var(--display); font-style: italic; font-weight: 500; font-size: clamp(60px, 7vw, 88px); color: var(--gilt-light); line-height: 1; margin-bottom: 14px; }
+.num-card .big span{ font-size: .55em; vertical-align: super; }
+.num-card .cap{ font-family: var(--italic); font-style: italic; font-size: 14.5px; color: rgba(244,236,223,.78); max-width: 200px; margin: 0 auto; line-height: 1.4; }
+@media (max-width: 820px){ .num-grid{ grid-template-columns: 1fr 1fr; gap: 40px 30px; } }
+
+.atelier-card.highlight{ background: var(--ink); color: var(--bone); border: 1px solid var(--gilt); position: relative; }
+.atelier-card.highlight .num{ color: var(--gilt-light); }
+.atelier-card.highlight h3{ color: var(--bone); }
+.atelier-card.highlight p{ color: rgba(244,236,223,.78); }
+.atelier-card.highlight .badge-rare{ display: inline-block; margin-top: 18px; font-family: var(--sans); font-size: 9px; letter-spacing: .42em; text-transform: uppercase; color: var(--gilt-light); padding: 6px 10px; border: 1px solid var(--gilt); }
+
+.atelier-process{ max-width: 1100px; margin: 90px auto; padding: 0 var(--pad); }
+.process-head{ text-align: center; margin-bottom: 56px; }
+.process-head .eyebrow{ font-family: var(--sans); font-size: 11px; letter-spacing: .55em; text-transform: uppercase; color: var(--gilt); margin-bottom: 14px; }
+.process-head h2{ font-family: var(--display); font-style: italic; font-weight: 400; font-size: clamp(40px, 5vw, 60px); color: var(--ink); line-height: 1; }
+.process-list{ list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--hairline); }
+.process-list li{ display: grid; grid-template-columns: 100px 1fr; gap: 30px; padding: 32px 0; border-bottom: 1px solid var(--hairline); align-items: start; }
+.process-list .step{ font-family: var(--display); font-style: italic; font-size: 56px; color: var(--gilt); line-height: 1; }
+.process-list h4{ font-family: var(--display); font-style: italic; font-size: 26px; color: var(--ink); margin-bottom: 8px; }
+.process-list p{ font-family: var(--serif); font-size: 16px; color: var(--ink-soft); line-height: 1.7; margin: 0; }
+@media (max-width: 600px){ .process-list li{ grid-template-columns: 60px 1fr; gap: 18px; } .process-list .step{ font-size: 36px; } }
+
+.atelier-grid{ max-width: 1200px; margin: 80px auto; padding: 0 var(--pad); display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+.atelier-card{ background: var(--parchment); padding: 40px 32px; border: 1px solid var(--hairline); position: relative; }
+.atelier-card .num{ font-family: var(--display); font-style: italic; font-size: 36px; color: var(--gilt); margin-bottom: 14px; }
+.atelier-card h3{ font-family: var(--display); font-style: italic; font-size: 24px; color: var(--ink); margin-bottom: 10px; }
+.atelier-card p{ font-size: 14.5px; color: var(--ink-soft); line-height: 1.65; }
+.atelier-locations{ max-width: 1200px; margin: 0 auto 100px; padding: 60px var(--pad); display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; border-top: 1px solid var(--hairline); }
+.location h4{ font-family: var(--sans); font-size: 10px; letter-spacing: .42em; text-transform: uppercase; color: var(--gilt); margin-bottom: 10px; }
+.location .city{ font-family: var(--display); font-style: italic; font-size: 30px; color: var(--ink); margin-bottom: 12px; }
+.location .addr{ font-family: var(--italic); font-style: italic; font-size: 14.5px; color: var(--ink-soft); line-height: 1.6; }
+
+.commission-band{ max-width: 1340px; margin: 70px auto; padding: 0 var(--pad); display: grid; grid-template-columns: 0.85fr 1fr; gap: 70px; align-items: start; }
+.commission-text{ position: sticky; top: 110px; }
+.commission-text .eyebrow{ font-family: var(--sans); font-size: 11px; letter-spacing: .55em; text-transform: uppercase; color: var(--gilt); margin-bottom: 14px; }
+.commission-text h2{ font-family: var(--display); font-style: italic; font-size: clamp(36px, 4.4vw, 52px); color: var(--ink); line-height: 1.05; margin-bottom: 22px; }
+.commission-text p{ font-family: var(--serif); font-size: 16px; color: var(--ink-soft); line-height: 1.75; }
+.commission-tiers{ display: flex; flex-direction: column; border-top: 1px solid var(--hairline); }
+.tier{ padding: 26px 0; border-bottom: 1px solid var(--hairline); display: grid; grid-template-columns: 1.2fr auto; gap: 18px 30px; align-items: baseline; }
+.tier-name{ font-family: var(--display); font-style: italic; font-size: 24px; color: var(--ink); }
+.tier-range{ font-family: var(--display); font-style: italic; font-size: 22px; color: var(--gilt); white-space: nowrap; text-align: right; }
+.tier-detail{ grid-column: 1 / -1; font-family: var(--italic); font-style: italic; font-size: 14px; color: var(--ink-soft); line-height: 1.6; opacity: .85; }
+.tier.highlight-tier{ background: var(--parchment); padding: 26px 22px; margin: 0 -22px; border: 1px solid var(--gilt); border-bottom: 1px solid var(--gilt); position: relative; }
+.tier.highlight-tier::before{ content: "Most chosen"; position: absolute; top: -10px; right: 22px; background: var(--ink); color: var(--bone); font-family: var(--sans); font-size: 8.5px; letter-spacing: .35em; text-transform: uppercase; padding: 4px 10px; }
+.couture-section-head{ max-width: 1340px; margin: 80px auto 30px; padding: 0 var(--pad); text-align: center; border-top: 1px solid var(--hairline); padding-top: 60px; }
+.couture-section-head .eyebrow{ font-family: var(--sans); font-size: 11px; letter-spacing: .55em; text-transform: uppercase; color: var(--gilt); margin-bottom: 14px; }
+.couture-section-head h2{ font-family: var(--display); font-style: italic; font-size: clamp(34px, 4vw, 46px); color: var(--ink); }
+@media (max-width: 820px){ .commission-band{ grid-template-columns: 1fr; gap: 40px; } .commission-text{ position: static; } }
+
+.timeline{ max-width: 1100px; margin: 60px auto; padding: 0 var(--pad); }
+.t-row{ display: grid; grid-template-columns: 180px 1fr; gap: 50px; padding: 60px 0; border-bottom: 1px solid var(--hairline); align-items: start; }
+.t-row:last-child{ border-bottom: 0; }
+.t-year{ font-family: var(--display); font-style: italic; font-size: 36px; color: var(--gilt); position: sticky; top: 110px; letter-spacing: .05em; }
+.t-content h3{ font-family: var(--display); font-style: italic; font-size: clamp(28px, 3vw, 38px); color: var(--ink); line-height: 1.15; margin-bottom: 18px; }
+.t-content p{ font-family: var(--serif); font-size: 16.5px; color: var(--ink-soft); line-height: 1.75; margin-bottom: 28px; }
+.t-images{ display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 14px; }
+.t-img{ cursor: pointer; position: relative; }
+.t-img img{ width: 100%; aspect-ratio: 3/4; object-fit: cover; background: var(--parchment); transition: transform 1.2s cubic-bezier(.22,.61,.36,1); }
+.t-img:hover img{ transform: scale(1.04); }
+.t-img small{ display: block; margin-top: 10px; font-family: var(--sans); font-size: 9.5px; letter-spacing: .35em; text-transform: uppercase; color: var(--ink-soft); }
+@media (max-width: 760px){ .t-row{ grid-template-columns: 1fr; gap: 18px; padding: 40px 0; } .t-year{ position: static; font-size: 28px; } .t-images{ grid-template-columns: 1fr 1fr; } }
+
+.gallery{ max-width: 1340px; margin: 60px auto; padding: 0 var(--pad); display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.gallery-item{ position: relative; aspect-ratio: 3/4; overflow: hidden; background: var(--parchment); cursor: pointer; }
+.gallery-item img{ width: 100%; height: 100%; object-fit: cover; transition: transform 1.4s cubic-bezier(.22,.61,.36,1); }
+.gallery-item:hover img{ transform: scale(1.06); }
+.gallery-item .label{ position: absolute; bottom: 0; left: 0; right: 0; padding: 22px 24px; background: linear-gradient(to top, rgba(31,26,23,.85), transparent); color: var(--bone); }
+.gallery-item .label h3{ font-family: var(--display); font-style: italic; font-size: 22px; margin-bottom: 4px; }
+.gallery-item .label small{ font-family: var(--sans); font-size: 9.5px; letter-spacing: .35em; text-transform: uppercase; opacity: .8; }
+.archive-year{ max-width: 1340px; margin: 80px auto 30px; padding: 0 var(--pad); display: flex; align-items: baseline; gap: 30px; border-bottom: 1px solid var(--hairline); padding-bottom: 18px; }
+.archive-year h2{ font-family: var(--display); font-style: italic; font-size: 56px; color: var(--ink); line-height: 1; }
+.archive-year span{ font-family: var(--sans); font-size: 11px; letter-spacing: .42em; text-transform: uppercase; color: var(--gilt); }
+
+.spread{ max-width: 1340px; margin: 80px auto; padding: 0 var(--pad); display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+.spread.flip{ direction: rtl; }
+.spread.flip > *{ direction: ltr; }
+.spread-img{ aspect-ratio: 3/4; overflow: hidden; }
+.spread-img img{ width:100%; height:100%; object-fit:cover; }
+.spread-text .num{ font-family: var(--display); font-style: italic; font-size: 80px; color: var(--gilt); line-height: 1; margin-bottom: 18px; }
+.spread-text h3{ font-family: var(--display); font-style: italic; font-size: clamp(36px, 4vw, 52px); color: var(--ink); margin-bottom: 22px; line-height: 1.05; }
+.spread-text p{ font-family: var(--serif); font-size: 16px; line-height: 1.7; color: var(--ink-soft); margin-bottom: 16px; }
+.spread-meta{ display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--hairline); font-family: var(--sans); font-size: 10px; letter-spacing: .35em; text-transform: uppercase; color: var(--ink-soft); }
+.spread-meta span:nth-child(odd){ color: var(--ink); }
+.lookbook-footer{ max-width: 720px; margin: 80px auto 100px; padding: 60px var(--pad); text-align: center; border-top: 1px solid var(--hairline); }
+.lookbook-footer .eyebrow{ font-family: var(--sans); font-size: 11px; letter-spacing: .55em; text-transform: uppercase; color: var(--gilt); margin-bottom: 18px; }
+.lookbook-footer p{ font-family: var(--italic); font-style: italic; font-size: 19px; color: var(--ink); line-height: 1.6; }
+@media (max-width: 820px){ .atelier-grid, .atelier-locations, .gallery{ grid-template-columns: 1fr 1fr; } .spread, .spread.flip{ grid-template-columns: 1fr; direction: ltr; } .spread-text .num{ font-size: 56px; } }
+@media (max-width: 540px){ .atelier-grid, .atelier-locations, .gallery{ grid-template-columns: 1fr; } }
+
+.menu-toggle{ display: none; width: 28px; height: 22px; position: relative; cursor: pointer; background: none; border: 0; padding: 0; z-index: 95; }
+.menu-toggle span{ position: absolute; left: 0; right: 0; height: 1px; background: var(--ink); transition: transform .35s, opacity .35s; }
+.menu-toggle span:nth-child(1){ top: 4px; }
+.menu-toggle span:nth-child(2){ top: 11px; }
+.menu-toggle span:nth-child(3){ top: 18px; }
+body.drawer-open .menu-toggle span:nth-child(1){ transform: translateY(7px) rotate(45deg); }
+body.drawer-open .menu-toggle span:nth-child(2){ opacity: 0; }
+body.drawer-open .menu-toggle span:nth-child(3){ transform: translateY(-7px) rotate(-45deg); }
+.mobile-drawer{ position: fixed; inset: 0; background: var(--bone); z-index: 90; padding: 100px 40px 40px; transform: translateX(-100%); transition: transform .55s cubic-bezier(.7,0,.3,1); display: flex; flex-direction: column; }
+.mobile-drawer.open{ transform: translateX(0); }
+.mobile-drawer .links{ display: flex; flex-direction: column; gap: 28px; flex: 1; }
+.mobile-drawer .links a{ font-family: var(--display); font-style: italic; font-size: 42px; color: var(--ink); position: relative; padding-bottom: 14px; border-bottom: 1px solid var(--hairline); }
+.mobile-drawer .links a span{ font-family: var(--sans); font-size: 9px; letter-spacing: .42em; color: var(--gilt); display: block; font-style: normal; margin-bottom: 4px; }
+.mobile-drawer .footer-strip{ font-family: var(--italic); font-style: italic; color: var(--ink-soft); font-size: 14px; }
+@media (max-width: 760px){ .menu-toggle{ display: block; } .nav-left .nav-link{ display: none; } .nav-left::before{ display: none !important; content: none; } }
+
+.cart-drawer{ position: fixed; top: 0; right: 0; width: 420px; max-width: 100%; height: 100%; background: var(--bone); z-index: 100; transform: translateX(100%); transition: transform .5s cubic-bezier(.7,0,.3,1); display: flex; flex-direction: column; border-left: 1px solid var(--hairline); box-shadow: -20px 0 60px -20px rgba(31,26,23,.25); }
+.cart-drawer.open{ transform: translateX(0); }
+.cart-head{ padding: 28px 32px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--hairline); }
+.cart-head h3{ font-family: var(--display); font-style: italic; font-size: 28px; color: var(--ink); }
+.cart-close{ background: none; border: 0; cursor: pointer; font-size: 24px; color: var(--ink); padding: 4px; }
+.cart-items{ flex: 1; overflow-y: auto; padding: 24px 32px; }
+.cart-item{ display: grid; grid-template-columns: 80px 1fr auto; gap: 18px; padding: 20px 0; border-bottom: 1px solid var(--hairline); }
+.cart-item img{ width: 80px; height: 100px; object-fit: cover; background: var(--parchment); }
+.cart-item .name{ font-family: var(--display); font-style: italic; font-size: 17px; color: var(--ink); margin-bottom: 4px; }
+.cart-item .det{ font-family: var(--sans); font-size: 10px; letter-spacing: .3em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 8px; }
+.cart-item .price{ font-family: var(--display); font-size: 16px; color: var(--ink); }
+.cart-item .remove{ background: none; border: 0; color: var(--ink-soft); font-family: var(--sans); font-size: 9px; letter-spacing: .3em; text-transform: uppercase; cursor: pointer; align-self: start; padding: 2px; }
+.cart-item .remove:hover{ color: var(--oxblood); }
+.cart-foot{ padding: 24px 32px 32px; border-top: 1px solid var(--hairline); background: var(--parchment); }
+.cart-total{ display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 18px; font-family: var(--sans); font-size: 11px; letter-spacing: .3em; text-transform: uppercase; color: var(--ink-soft); }
+.cart-total strong{ font-family: var(--display); font-style: italic; font-size: 28px; color: var(--ink); letter-spacing: 0; }
+.cart-checkout{ display: block; width: 100%; background: var(--ink); color: var(--bone); border: 0; padding: 18px; font-family: var(--sans); font-size: 11px; letter-spacing: .42em; text-transform: uppercase; cursor: pointer; text-align: center; transition: background .3s; }
+.cart-checkout:hover{ background: var(--oxblood); }
+.scrim{ position: fixed; inset: 0; background: rgba(31,26,23,.45); opacity: 0; pointer-events: none; transition: opacity .4s; z-index: 80; }
+.scrim.open{ opacity: 1; pointer-events: auto; }
+
+.modal{ position: fixed; inset: 0; z-index: 110; display: none; align-items: center; justify-content: center; padding: 30px; }
+.modal.open{ display: flex; }
+.modal-back{ position: absolute; inset: 0; background: rgba(31,26,23,.6); }
+.modal-card{ position: relative; background: var(--bone); max-width: 900px; width: 100%; max-height: 86vh; display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--gilt); overflow: hidden; animation: rise .5s cubic-bezier(.22,.61,.36,1); }
+@keyframes rise{ from{ opacity:0; transform: translateY(30px); } to{ opacity:1; transform: none; } }
+.modal-img{ background: var(--parchment); overflow: hidden; aspect-ratio: 3/4; }
+.modal-img img{ width: 100%; height: 100%; object-fit: cover; }
+.modal-body{ padding: 50px 40px; display: flex; flex-direction: column; }
+.modal-body .eyebrow{ font-family: var(--sans); font-size: 10px; letter-spacing: .42em; text-transform: uppercase; color: var(--gilt); margin-bottom: 12px; }
+.modal-body h2{ font-family: var(--display); font-style: italic; font-size: 42px; color: var(--ink); line-height: 1; margin-bottom: 12px; }
+.modal-body .pri{ font-family: var(--display); font-style: italic; font-size: 22px; color: var(--ink); margin-bottom: 22px; padding-bottom: 22px; border-bottom: 1px solid var(--hairline); }
+.modal-body p{ font-family: var(--serif); font-size: 15px; color: var(--ink-soft); line-height: 1.7; margin-bottom: 26px; }
+.modal-body .add{ background: var(--ink); color: var(--bone); border: 0; padding: 16px 28px; font-family: var(--sans); font-size: 11px; letter-spacing: .42em; text-transform: uppercase; cursor: pointer; transition: background .3s; align-self: flex-start; }
+.modal-body .add:hover{ background: var(--oxblood); }
+.modal-close{ position: absolute; top: 16px; right: 18px; width: 36px; height: 36px; border-radius: 50%; background: var(--bone); border: 1px solid var(--ink); cursor: pointer; font-size: 16px; color: var(--ink); z-index: 2; }
+@media (max-width: 760px){ .modal-card{ grid-template-columns: 1fr; max-height: 92vh; overflow-y: auto; } .modal-img{ aspect-ratio: 4/3; } .modal-body{ padding: 32px 26px; } }
+
+@media (hover: hover) and (min-width: 900px){
+  body{ cursor: none; }
+  a, button, .product, .gallery-item, .swiper-btn, .arrival-card, .menu-toggle{ cursor: none; }
+  .cursor{ position: fixed; top: 0; left: 0; width: 24px; height: 24px; border: 1px solid var(--ink); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); transition: width .25s, height .25s, background .25s, border-color .25s; mix-blend-mode: difference; background: transparent; }
+  .cursor.hover{ width: 50px; height: 50px; background: rgba(244,236,223,.25); }
+  .cursor-dot{ position: fixed; top: 0; left: 0; width: 4px; height: 4px; background: var(--ink); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); mix-blend-mode: difference; }
+}
+.cursor, .cursor-dot{ display: none; }
+@media (hover: hover) and (min-width: 900px){ .cursor, .cursor-dot{ display: block; } }
+
+.reveal{ opacity: 0; transform: translateY(40px); transition: opacity 1s cubic-bezier(.22,.61,.36,1), transform 1s cubic-bezier(.22,.61,.36,1); }
+.reveal.in{ opacity: 1; transform: none; }
+
+.search-overlay{ position: fixed; inset: 0; background: rgba(244,236,223,.96); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); z-index: 105; display: none; flex-direction: column; padding: 0 var(--pad); }
+.search-overlay.open{ display: flex; animation: searchFade .35s ease; }
+@keyframes searchFade{ from{ opacity: 0; } to{ opacity: 1; } }
+.search-head{ display: flex; align-items: center; height: 90px; border-bottom: 1px solid var(--hairline); }
+.search-head .logo{ font-family: var(--display); font-style: italic; font-size: 24px; color: var(--ink); }
+.search-close{ margin-left: auto; background: none; border: 0; font-family: var(--sans); font-size: 11px; letter-spacing: .42em; text-transform: uppercase; color: var(--ink); cursor: pointer; padding: 6px 0; }
+.search-input-wrap{ padding: 50px 0 30px; border-bottom: 1px solid var(--hairline); }
+.search-input-wrap input{ width: 100%; border: 0; background: transparent; font-family: var(--display); font-style: italic; font-size: clamp(28px, 5vw, 56px); color: var(--ink); outline: none; caret-color: var(--gilt); }
+.search-input-wrap input::placeholder{ color: var(--ink-soft); opacity: .35; }
+.search-results{ padding: 30px 0; flex: 1; overflow-y: auto; }
+.search-suggestions{ display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 30px; }
+.search-suggestions span{ font-family: var(--sans); font-size: 10px; letter-spacing: .35em; text-transform: uppercase; color: var(--ink-soft); padding: 8px 14px; border: 1px solid var(--hairline-2); cursor: pointer; transition: all .25s; }
+.search-suggestions span:hover{ background: var(--ink); color: var(--bone); border-color: var(--ink); }
+.search-results-list{ display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 24px; }
+.search-result{ display: block; cursor: pointer; }
+.search-result img{ width: 100%; aspect-ratio: 3/4; object-fit: cover; background: var(--parchment); margin-bottom: 12px; transition: transform .8s; }
+.search-result:hover img{ transform: scale(1.03); }
+.search-result h4{ font-family: var(--display); font-style: italic; font-size: 18px; color: var(--ink); margin-bottom: 2px; }
+.search-result span{ font-family: var(--sans); font-size: 10px; letter-spacing: .3em; text-transform: uppercase; color: var(--ink-soft); }
+.search-empty{ font-family: var(--italic); font-style: italic; font-size: 18px; color: var(--ink-soft); padding: 40px 0; text-align: center; }
+
+.wish{ position: absolute; top: 12px; right: 12px; width: 32px; height: 32px; border-radius: 50%; background: rgba(244,236,223,.85); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); border: 1px solid var(--hairline); display: grid; place-items: center; cursor: pointer; z-index: 3; transition: all .25s; }
+.wish svg{ width: 14px; height: 14px; fill: none; stroke: var(--ink); stroke-width: 1.6; transition: all .25s; }
+.wish:hover{ background: var(--bone); transform: scale(1.08); }
+.wish.saved svg{ fill: var(--oxblood); stroke: var(--oxblood); }
+.wish.saved{ animation: heartPop .4s; }
+@keyframes heartPop{ 0%{ transform: scale(1); } 40%{ transform: scale(1.25); } 100%{ transform: scale(1); } }
+
+.commission-modal{ position: fixed; inset: 0; z-index: 115; display: none; align-items: center; justify-content: center; padding: 30px; }
+.commission-modal.open{ display: flex; animation: searchFade .4s ease; }
+.commission-modal .modal-back{ position: absolute; inset: 0; background: rgba(31,26,23,.7); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); }
+.commission-card{ position: relative; background: var(--bone); width: 100%; max-width: 720px; max-height: 88vh; overflow-y: auto; border: 1px solid var(--gilt); padding: 50px 50px 40px; animation: rise .5s cubic-bezier(.22,.61,.36,1); }
+.commission-close{ position: absolute; top: 16px; right: 18px; width: 36px; height: 36px; border-radius: 50%; background: var(--bone); border: 1px solid var(--ink); cursor: pointer; font-size: 16px; color: var(--ink); z-index: 2; }
+.commission-progress{ display: flex; gap: 6px; margin-bottom: 30px; }
+.commission-progress span{ flex: 1; height: 2px; background: var(--hairline); transition: background .4s; }
+.commission-progress span.done{ background: var(--gilt); }
+.commission-progress span.current{ background: var(--ink); }
+.commission-step{ display: none; }
+.commission-step.active{ display: block; animation: stepFade .4s ease; }
+@keyframes stepFade{ from{ opacity: 0; transform: translateY(10px); } to{ opacity: 1; transform: none; } }
+.commission-step .eyebrow{ font-family: var(--sans); font-size: 10px; letter-spacing: .42em; text-transform: uppercase; color: var(--gilt); margin-bottom: 12px; }
+.commission-step h2{ font-family: var(--display); font-style: italic; font-size: clamp(28px, 3.4vw, 38px); color: var(--ink); margin-bottom: 8px; line-height: 1.1; }
+.commission-step .help{ font-family: var(--italic); font-style: italic; font-size: 14.5px; color: var(--ink-soft); margin-bottom: 26px; }
+.choice-grid{ display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 30px; }
+.choice{ border: 1px solid var(--hairline-2); background: transparent; padding: 18px 18px; text-align: left; font-family: inherit; cursor: pointer; transition: all .2s; }
+.choice strong{ display: block; font-family: var(--display); font-style: italic; font-size: 19px; color: var(--ink); margin-bottom: 4px; font-weight: 500; }
+.choice small{ display: block; font-family: var(--sans); font-size: 9.5px; letter-spacing: .25em; text-transform: uppercase; color: var(--ink-soft); }
+.choice:hover{ border-color: var(--ink); background: var(--parchment); }
+.choice.selected{ border-color: var(--ink); background: var(--ink); }
+.choice.selected strong, .choice.selected small{ color: var(--bone); }
+.choice.selected small{ color: var(--gilt-light); }
+.commission-step input[type="text"], .commission-step input[type="email"], .commission-step input[type="date"], .commission-step textarea{ width: 100%; border: 0; border-bottom: 1px solid var(--hairline-2); background: transparent; padding: 12px 0; font-family: var(--italic); font-style: italic; font-size: 17px; color: var(--ink); margin-bottom: 22px; outline: none; transition: border-color .25s; }
+.commission-step input:focus, .commission-step textarea:focus{ border-bottom-color: var(--ink); }
+.commission-step textarea{ resize: vertical; min-height: 100px; font-family: var(--serif); font-style: normal; font-size: 15px; }
+.commission-step label{ display: block; font-family: var(--sans); font-size: 10px; letter-spacing: .35em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 4px; }
+.commission-nav{ display: flex; justify-content: space-between; align-items: center; margin-top: 24px; padding-top: 22px; border-top: 1px solid var(--hairline); }
+.commission-back-btn, .commission-next-btn{ font-family: var(--sans); font-size: 11px; letter-spacing: .42em; text-transform: uppercase; cursor: pointer; border: 0; background: transparent; padding: 12px 0; color: var(--ink-soft); }
+.commission-back-btn:hover{ color: var(--ink); }
+.commission-next-btn{ background: var(--ink); color: var(--bone); padding: 14px 26px; transition: background .3s; }
+.commission-next-btn:hover{ background: var(--oxblood); }
+.commission-next-btn:disabled{ opacity: .35; cursor: not-allowed; }
+.commission-thanks{ text-align: center; padding: 30px 0; }
+.commission-thanks .gilt-mark{ font-family: var(--display); font-style: italic; font-size: 90px; color: var(--gilt); line-height: 1; margin-bottom: 16px; }
+.commission-thanks h2{ margin-bottom: 14px; }
+.commission-thanks p{ font-family: var(--italic); font-style: italic; font-size: 16px; color: var(--ink-soft); max-width: 460px; margin: 0 auto 24px; line-height: 1.6; }
+@media (max-width: 600px){ .commission-card{ padding: 36px 22px 26px; } .choice-grid{ grid-template-columns: 1fr; } }
+.commission-cta-btn{ display: inline-flex; align-items: center; gap: 12px; font-family: var(--sans); font-size: 11px; letter-spacing: .42em; text-transform: uppercase; color: var(--bone); background: var(--ink); padding: 18px 28px; border: 0; cursor: pointer; transition: background .3s; }
+.commission-cta-btn:hover{ background: var(--oxblood); }
+.commission-cta-btn .arr{ font-size: 14px; transition: transform .3s; }
+.commission-cta-btn:hover .arr{ transform: translateX(4px); }
+.commission-cta-btn.on-dark{ background: transparent; color: var(--bone); border: 1px solid var(--gilt-light); }
+.commission-cta-btn.on-dark:hover{ background: var(--gilt); color: var(--ink); border-color: var(--gilt); }
+
+.journal{ padding: 100px var(--pad); background: var(--parchment); border-top: 1px solid var(--hairline); border-bottom: 1px solid var(--hairline); }
+.journal-head{ max-width: 1100px; margin: 0 auto 50px; display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 1px solid var(--hairline); padding-bottom: 22px; }
+.journal-head .titles .eyebrow{ font-family: var(--sans); font-size: 10px; letter-spacing: .55em; text-transform: uppercase; color: var(--gilt); margin-bottom: 10px; }
+.journal-head .titles h2{ font-family: var(--display); font-style: italic; font-weight: 400; font-size: clamp(38px, 5vw, 58px); color: var(--ink); line-height: 1; }
+.journal-head .live{ display: flex; align-items: center; gap: 8px; font-family: var(--sans); font-size: 10px; letter-spacing: .35em; text-transform: uppercase; color: var(--ink-soft); }
+.journal-head .live .dot{ width: 8px; height: 8px; background: var(--oxblood); border-radius: 50%; animation: pulse 2s ease-in-out infinite; }
+@keyframes pulse{ 0%, 100%{ opacity: 1; transform: scale(1); } 50%{ opacity: .35; transform: scale(.85); } }
+.journal-grid{ max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+.journal-entry{ display: flex; flex-direction: column; }
+.journal-entry .day{ font-family: var(--display); font-style: italic; font-size: 14px; color: var(--gilt); letter-spacing: .15em; margin-bottom: 10px; }
+.journal-entry .photo{ aspect-ratio: 4/5; overflow: hidden; margin-bottom: 14px; background: var(--bone); }
+.journal-entry .photo img{ width: 100%; height: 100%; object-fit: cover; filter: sepia(8%) contrast(1.02); transition: transform 1s; }
+.journal-entry:hover .photo img{ transform: scale(1.04); }
+.journal-entry h4{ font-family: var(--display); font-style: italic; font-size: 22px; color: var(--ink); margin-bottom: 8px; line-height: 1.2; }
+.journal-entry p{ font-family: var(--serif); font-size: 14.5px; line-height: 1.65; color: var(--ink-soft); }
+@media (max-width: 820px){ .journal-head{ flex-direction: column; align-items: flex-start; gap: 16px; } .journal-grid{ grid-template-columns: 1fr; gap: 26px; } }
+
+.letters{ padding: 100px var(--pad); }
+.letters-inner{ max-width: 1100px; margin: 0 auto; }
+.letters-head{ text-align: center; margin-bottom: 60px; }
+.letters-head .eyebrow{ font-family: var(--sans); font-size: 10px; letter-spacing: .55em; text-transform: uppercase; color: var(--gilt); margin-bottom: 12px; }
+.letters-head h2{ font-family: var(--display); font-style: italic; font-weight: 400; font-size: clamp(36px, 4.6vw, 54px); color: var(--ink); line-height: 1.05; }
+.letter-stack{ display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; }
+.letter-card{ background: var(--bone); border: 1px solid var(--hairline); padding: 36px 36px 30px; position: relative; }
+.letter-card::before{ content: '"'; position: absolute; top: -10px; left: 22px; font-family: var(--display); font-style: italic; font-size: 90px; color: var(--gilt); line-height: 1; }
+.letter-card p{ font-family: var(--italic); font-style: italic; font-size: 17px; color: var(--ink); line-height: 1.65; margin: 14px 0 22px; }
+.letter-card .signoff{ font-family: var(--display); font-style: italic; font-size: 18px; color: var(--gilt); border-top: 1px solid var(--hairline); padding-top: 16px; }
+.letter-card .signoff small{ display: block; font-family: var(--sans); font-size: 9px; letter-spacing: .35em; text-transform: uppercase; color: var(--ink-soft); margin-top: 4px; font-style: normal; }
+@media (max-width: 760px){ .letter-stack{ grid-template-columns: 1fr; } }
+
+.account-modal{ position: fixed; inset: 0; z-index: 110; display: none; align-items: center; justify-content: center; padding: 30px; }
+.account-modal.open{ display: flex; animation: searchFade .35s ease; }
+.account-modal .modal-back{ position: absolute; inset: 0; background: rgba(31,26,23,.55); }
+.account-card{ position: relative; background: var(--bone); width: 100%; max-width: 440px; padding: 50px 40px 40px; border: 1px solid var(--gilt); text-align: center; animation: rise .5s cubic-bezier(.22,.61,.36,1); }
+.account-card h2{ font-family: var(--display); font-style: italic; font-size: 30px; color: var(--ink); margin-bottom: 8px; }
+.account-card p{ font-family: var(--italic); font-style: italic; font-size: 14.5px; color: var(--ink-soft); line-height: 1.6; margin-bottom: 26px; }
+.account-card input{ width: 100%; border: 0; border-bottom: 1px solid var(--hairline-2); background: transparent; padding: 12px 0; font-family: var(--italic); font-style: italic; font-size: 15px; color: var(--ink); margin-bottom: 18px; outline: none; text-align: center; }
+.account-card .actions{ display: flex; flex-direction: column; gap: 8px; margin-top: 14px; }
+.account-card button{ font-family: var(--sans); font-size: 11px; letter-spacing: .42em; text-transform: uppercase; padding: 14px; border: 0; cursor: pointer; background: var(--ink); color: var(--bone); transition: background .3s; }
+.account-card button:hover{ background: var(--oxblood); }
+.account-card .request{ background: transparent; color: var(--ink); text-decoration: underline; text-underline-offset: 4px; padding: 8px; }
+.account-card .request:hover{ background: transparent; color: var(--gilt); }
+
+.page{ transition: opacity .55s ease; }
+.page.entering{ opacity: 0; transform: translateY(14px); }
+
+</style>
+</head>
+<body data-sld="0">
+
+<header class="l-header">
+  <nav class="nav">
+    <div class="nav-left">
+      <button class="menu-toggle" id="menuToggle" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+      <a href="#" class="nav-link active-link" data-page="home">Home</a>
+      <a href="#" class="nav-link" data-page="atelier">Atelier</a>
+      <a href="#" class="nav-link" data-page="couture">Couture</a>
+      <a href="#" class="nav-link" data-page="archive">Archive</a>
+      <a href="#" class="nav-link" data-page="lookbook">Lookbook</a>
+    </div>
+
+    <a href="#" class="nav-logo" data-page="home">
+      Queen Mode
+      <small>est. mmxxv · london</small>
+    </a>
+
+    <div class="nav-right">
+      <button class="nav-icon-btn" id="searchOpen" aria-label="Search">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="11" cy="11" r="7"/><path d="M21 21l-5-5"/></svg>
+      </button>
+      <button class="nav-icon-btn" id="accountOpen" aria-label="Account">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="8" r="4"/><path d="M4 22c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
+      </button>
+      <button class="cart-pill" id="cartOpen">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 7h12l-1.5 13H7.5L6 7z"/><path d="M9 7V5a3 3 0 016 0v2"/></svg>
+        <span class="label">Vitrine</span>
+        <span class="count">2</span>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<div class="page page-home active" data-page="home">
+<section class="hero">
+  <div class="hero-frame">
+
+    <div class="hero-eyebrow">
+      <span class="rule"></span>
+      <span>The Spring Collection · MMXXVI</span>
+      <span class="rule"></span>
+    </div>
+
+    <div class="swiper heroSwiper">
+      <div class="swiper-wrapper">
+
+        <div class="swiper-slide slide" id="ophelia">
+          <div class="slide-no tl">01</div>
+          <div class="slide-text">
+            <div class="slide-collection">№ 01 · The Riverbank</div>
+            <h1 class="slide-title">Ophelia</h1>
+            <div class="slide-tagline">silk chiffon &amp; pressed muslin</div>
+            <div class="slide-price"><span>From</span><strong>€ 1,840</strong><span>· Atelier</span></div>
+            <p class="slide-desc">A study in drowned florals — hand-embroidered cornflower along a bias-cut hem, sleeves drawn from the 1873 dressing-gown archive.</p>
+            <div class="slide-meta">— bespoke fitting available, four to six weeks</div>
+            <a href="#" class="slide-cta">Reserve a fitting<span class="arrow"></span></a>
+          </div>
+          <div class="slide-display">
+            <div class="dress-stage">
+              <div class="dress-bg" style="background-image:url('https://images.unsplash.com/photo-1505118380757-91f5f5632de0?q=80&w=1600&auto=format&fit=crop');"></div>
+              <img class="dress-img" src="https://cdn.jsdelivr.net/gh/solomonopoly/muse/DRESS1.png" alt="The Ophelia gown" />
+            </div>
+          </div>
+          <div class="slide-decor">
+            <div class="pantone" style="top: 240px; left: 80px;">
+              <div class="row"><div class="chip" style="background:#3a3128"></div><div class="chip" style="background:#6e1f24"></div><div class="chip" style="background:#b08442"></div><div class="chip" style="background:#e8dfd1"></div></div>
+              <div class="label">Palette · I</div>
+            </div>
+            <div class="slide-ribbon">Queen Mode · MMXXVI</div>
+            <div class="fragment f-1"><img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=400&auto=format&fit=crop" alt=""></div>
+          </div>
+          <div class="slide-no br">04</div>
+        </div>
+
+        <div class="swiper-slide slide" id="seraphim">
+          <div class="slide-no tl">02</div>
+          <div class="slide-text">
+            <div class="slide-collection">№ 02 · The Cathedral</div>
+            <h1 class="slide-title">Seraphim</h1>
+            <div class="slide-tagline">cloth-of-gold &amp; antique brocade</div>
+            <div class="slide-price"><span>From</span><strong>€ 2,210</strong><span>· Couture</span></div>
+            <p class="slide-desc">An evening corsage of gilded thread upon hand-loomed jacquard. Boned bodice drafted from a private 1889 commission, modernised through draped Lyon silk.</p>
+            <div class="slide-meta">— each piece numbered &amp; signed by the première</div>
+            <a href="#" class="slide-cta">Reserve a fitting<span class="arrow"></span></a>
+          </div>
+          <div class="slide-display">
+            <div class="dress-stage">
+              <div class="dress-bg" style="background-image:url('https://images.unsplash.com/photo-1613109526778-27605f1f27d2?q=80&w=1600&auto=format&fit=crop');"></div>
+              <img class="dress-img" src="https://cdn.jsdelivr.net/gh/solomonopoly/muse/DRESS1.png" alt="The Seraphim gown" />
+            </div>
+          </div>
+          <div class="slide-decor">
+            <div class="pantone" style="top: 240px; left: 80px;">
+              <div class="row"><div class="chip" style="background:#1f1a17"></div><div class="chip" style="background:#b08442"></div><div class="chip" style="background:#d4ad6c"></div><div class="chip" style="background:#d9c2a8"></div></div>
+              <div class="label">Palette · II</div>
+            </div>
+            <div class="slide-ribbon">Queen Mode · MMXXVI</div>
+            <div class="fragment f-1"><img src="https://images.unsplash.com/photo-1583391733956-6c78276477e2?q=80&w=400&auto=format&fit=crop" alt=""></div>
+          </div>
+          <div class="slide-no br">04</div>
+        </div>
+
+        <div class="swiper-slide slide" id="vesper">
+          <div class="slide-no tl">03</div>
+          <div class="slide-text">
+            <div class="slide-collection">№ 03 · The Glasshouse</div>
+            <h1 class="slide-title">Vesper</h1>
+            <div class="slide-tagline">moss velvet &amp; ivory tulle</div>
+            <div class="slide-price"><span>From</span><strong>€ 1,960</strong><span>· Couture</span></div>
+            <p class="slide-desc">Drawing-room reverie in dusk-green velvet, the bodice softened with a tulle collarette in the manner of the late Belle Époque. Hand-fastened mother-of-pearl.</p>
+            <div class="slide-meta">— limited release of forty-eight pieces</div>
+            <a href="#" class="slide-cta">Reserve a fitting<span class="arrow"></span></a>
+          </div>
+          <div class="slide-display">
+            <div class="dress-stage">
+              <div class="dress-bg" style="background-image:url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=1600&auto=format&fit=crop');"></div>
+              <img class="dress-img" src="https://cdn.jsdelivr.net/gh/solomonopoly/muse/DRESS1.png" alt="The Vesper gown" />
+            </div>
+          </div>
+          <div class="slide-decor">
+            <div class="pantone" style="top: 240px; left: 80px;">
+              <div class="row"><div class="chip" style="background:#2e3a2c"></div><div class="chip" style="background:#b9c7b6"></div><div class="chip" style="background:#f8f2e6"></div><div class="chip" style="background:#1f1a17"></div></div>
+              <div class="label">Palette · III</div>
+            </div>
+            <div class="slide-ribbon">Queen Mode · MMXXVI</div>
+            <div class="fragment f-1"><img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=400&auto=format&fit=crop" alt=""></div>
+          </div>
+          <div class="slide-no br">04</div>
+        </div>
+
+        <div class="swiper-slide slide" id="rosalind">
+          <div class="slide-no tl">04</div>
+          <div class="slide-text">
+            <div class="slide-collection">№ 04 · The Garden Letter</div>
+            <h1 class="slide-title">Rosalind</h1>
+            <div class="slide-tagline">crushed rose &amp; embroidered linen</div>
+            <div class="slide-price"><span>From</span><strong>€ 1,720</strong><span>· Atelier</span></div>
+            <p class="slide-desc">Romantic afternoon dress in rouge-washed linen, bodice printed by hand from an 1894 botanical plate. Drawstring waist drafted in the cottage-tradition.</p>
+            <div class="slide-meta">— available in three lengths, finished to order</div>
+            <a href="#" class="slide-cta">Reserve a fitting<span class="arrow"></span></a>
+          </div>
+          <div class="slide-display">
+            <div class="dress-stage">
+              <div class="dress-bg" style="background-image:url('https://images.unsplash.com/photo-1546500840-ae38253aba9b?q=80&w=1600&auto=format&fit=crop');"></div>
+              <img class="dress-img" src="https://cdn.jsdelivr.net/gh/solomonopoly/muse/DRESS1.png" alt="The Rosalind gown" />
+            </div>
+          </div>
+          <div class="slide-decor">
+            <div class="pantone" style="top: 240px; left: 80px;">
+              <div class="row"><div class="chip" style="background:#b05552"></div><div class="chip" style="background:#c98d7d"></div><div class="chip" style="background:#6e1f24"></div><div class="chip" style="background:#f4ecdf"></div></div>
+              <div class="label">Palette · IV</div>
+            </div>
+            <div class="slide-ribbon">Queen Mode · MMXXVI</div>
+            <div class="fragment f-1"><img src="https://images.unsplash.com/photo-1496440737103-cd596325d314?q=80&w=400&auto=format&fit=crop" alt=""></div>
+          </div>
+          <div class="slide-no br">04</div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="hero-pagination"></div>
+    <div class="hero-controls">
+      <button class="swiper-btn prev" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></button>
+      <button class="swiper-btn next" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></button>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     COLLECTION SPLIT — daywear / eveningwear (PATCH: previously orphaned CSS, now wired)
+============================================================ -->
+<section class="collection">
+  <div class="collection-head">
+    <div>
+      <div class="eyebrow">— The Wardrobe</div>
+      <h2>Day &amp; Evening</h2>
+    </div>
+    <a href="#" class="read" data-page="couture">Browse the full couture →</a>
+  </div>
+  <div class="collection-grid">
+    <div class="collection-card" data-page="couture">
+      <span class="tag">№ I · Morning to Tea</span>
+      <img src="https://cdn.jsdelivr.net/gh/solomonopoly/muse/MAM_7204.jpeg" alt="Daywear">
+      <div class="meta"><h3><small>Walking dresses · tea gowns · linens</small>Daywear</h3><span class="arrow">→</span></div>
+    </div>
+    <div class="collection-card" data-page="couture">
+      <span class="tag">№ II · Dusk Onward</span>
+      <img src="https://cdn.jsdelivr.net/gh/solomonopoly/muse/MAM_7718.jpg" alt="Eveningwear">
+      <div class="meta"><h3><small>Ball gowns · bodices · cloth-of-gold</small>Eveningwear</h3><span class="arrow">→</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="marquee-band">
+  <div class="track">
+    <span>Bespoke Couture</span><span>Hand-Embroidered</span><span>Atelier Australia</span><span>Timeless Pieces</span>
+    <span>Bespoke Couture</span><span>Hand-Embroidered</span><span>Atelier Australia</span><span>Timeless Pieces</span>
+  </div>
+</div>
+
+<section class="featured">
+  <div class="featured-head">
+    <div class="eyebrow">— Selected Pieces</div>
+    <h2>The Couturier's Choice</h2>
+    <div class="sub">— four pieces from the season's hand</div>
+  </div>
+  <div class="featured-grid">
+    <div class="product">
+      <div class="frame"><span class="badge">New</span><img src="https://cdn.jsdelivr.net/gh/solomonopoly/muse/qmd.jpeg" alt=""><div class="quick">Quick view</div></div>
+      <h3>Cordelia Walking Dress</h3>
+      <div class="row2"><span>Wool · Bone Buttons</span><span class="price">€ 1,420</span></div>
+    </div>
+    <div class="product">
+      <div class="frame"><span class="badge couture">Couture</span><img src="https://cdn.jsdelivr.net/gh/solomonopoly/muse/thoi.jpeg" alt=""><div class="quick">Quick view</div></div>
+      <h3>Belladonna Bodice</h3>
+      <div class="row2"><span>Silk · Hand-laced</span><span class="price">€ 980</span></div>
+    </div>
+    <div class="product">
+      <div class="frame"><span class="badge archive">Archive</span><img src="https://cdn.jsdelivr.net/gh/solomonopoly/muse/crop.jpeg" alt=""><div class="quick">Quick view</div></div>
+      <h3>Hester Mantle</h3>
+      <div class="row2"><span>Velvet · Gold Cord</span><span class="price">€ 2,260</span></div>
+    </div>
+    <div class="product">
+      <div class="frame"><span class="badge">New</span><img src="https://cdn.jsdelivr.net/gh/solomonopoly/muse/coppp.jpeg" alt=""><div class="quick">Quick view</div></div>
+      <h3>Aurelia Tea Gown</h3>
+      <div class="row2"><span>Linen · Hand-Printed</span><span class="price">€ 1,180</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="editorial">
+  <div class="editorial-frame">
+    <div class="eyebrow">— The Lookbook</div>
+    <h2>The <em>Vesper</em><br>Edit, in moss<br>&amp; moonlight.</h2>
+    <p>Forty-eight ensembles photographed in the conservatories of Kew, where the maison's third volume was conceived and stitched by hand.</p>
+    <a href="#" class="editorial-cta" data-page="lookbook">Open the Volume<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+  </div>
+</section>
+
+<section class="arrivals">
+  <div class="featured-head">
+    <div class="eyebrow">— Recently Released</div>
+    <h2>The New Pieces</h2>
+    <div class="sub">— added to the maison this fortnight</div>
+  </div>
+  <div class="arrivals-grid">
+    <div class="arrival-card tall"><span class="info">№ 071 · Eveningwear</span><img src="https://cdn.jsdelivr.net/gh/solomonopoly/muse/mod82.jpg" alt=""><div class="overlay"><a href="#" class="button">View piece</a></div></div>
+    <div class="arrival-card regular"><span class="info dark">№ 072 · Daywear</span><img src="https://cdn.jsdelivr.net/gh/solomonopoly/muse/fam.jpeg" alt=""><div class="overlay"><a href="#" class="button">View piece</a></div></div>
+    <div class="arrival-card regular"><span class="info dark">№ 073 · Outerwear</span><img src="https://cdn.jsdelivr.net/gh/solomonopoly/muse/MAM_7265.jpeg" alt=""><div class="overlay"><a href="#" class="button">View piece</a></div></div>
+    <div class="arrival-card regular"><span class="info">№ 074 · Couture</span><img src="https://cdn.jsdelivr.net/gh/solomonopoly/muse/mod63.jpeg" alt=""><div class="overlay"><a href="#" class="button">View piece</a></div></div>
+    <div class="arrival-card regular"><span class="info dark">№ 075 · Daywear</span><img src="https://cdn.jsdelivr.net/gh/solomonopoly/muse/MAM_7360.jpeg" alt=""><div class="overlay"><a href="#" class="button">View piece</a></div></div>
+  </div>
+</section>
+
+<section class="heritage">
+  <div class="heritage-inner">
+    <div class="heritage-img"><img src="https://cdn.jsdelivr.net/gh/solomonopoly/muse/image7.jpeg" alt=""></div>
+    <div class="heritage-text">
+      <div class="eyebrow">— A Letter from the Atelier</div>
+      <h2>One designer, nine years, two hands.</h2>
+      <p>I started Queen Mode in 2017 with a borrowed dressmaker's dummy and a single yard of antique muslin. The first gown took eleven weeks. Over a hundred and twenty pieces later, I still draft, cut, and finish every commission myself — for adults, and for children too.</p>
+      <p>The cloth is sourced from mills that have woven for the trade since the reign of Victoria. The embroideries are threaded by the women of Lunéville, in botanicals, ribbons, and small private symbols of the wearer's choosing.</p>
+      <div class="heritage-sig">— Vy Jameson <small>Founder · Première · Sole Pair of Hands</small></div>
+      <button class="commission-cta-btn on-dark" id="commissionOpen1" style="margin-top: 28px;">Begin a Commission<span class="arr">→</span></button>
+    </div>
+  </div>
+</section>
+
+<section class="letters">
+  <div class="letters-inner">
+    <div class="letters-head">
+      <div class="eyebrow">— Letters from Wearers</div>
+      <h2>What they said, in their own words.</h2>
+    </div>
+    <div class="letter-stack">
+      <div class="letter-card"><p>Eleanor made my mother's wedding gown into something my daughter could wear. Three generations in the same cloth. I have never been so moved by a piece of clothing in my life.</p><div class="signoff">— Beatrice, 62<small>Restoration · MMXXVI</small></div></div>
+      <div class="letter-card"><p>The fitting itself was an experience I won't forget. Two hours of tea and conversation. By the end I felt as though I had been measured for the gown of a person I was trying to become.</p><div class="signoff">— Camille, 28<small>Bespoke · Vienna debut, MMXXVI</small></div></div>
+      <div class="letter-card"><p>My daughter's flower-girl dress matched my wedding gown exactly. She wore it for two days afterwards and refused to take it off. It will fit her cousin in three years.</p><div class="signoff">— Mira, 34<small>Bespoke adult · children's atelier · MMXXVI</small></div></div>
+      <div class="letter-card"><p>I commissioned a christening gown for my son. Hand-finished hems, the smallest mother-of-pearl buttons I have ever seen, a piece I intend to keep for the rest of my life and pass down. The price was fair. The work was extraordinary.</p><div class="signoff">— Helena, 31<small>Children's atelier · MMXXV</small></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="journal">
+  <div class="journal-head">
+    <div class="titles"><div class="eyebrow">— From the Cutting-Table</div><h2>The Journal</h2></div>
+    <div class="live"><span class="dot"></span>Updated weekly</div>
+  </div>
+  <div class="journal-grid">
+    <div class="journal-entry"><div class="day">Monday · 04 May MMXXVI</div><div class="photo"><img src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?q=80&w=900&auto=format&fit=crop" alt=""></div><h4>Drafting the Eloise commission's bodice block.</h4><p>Three hours on the toile. The growth allowance went into the side seams instead of the hem this time — a request from her mother, who wants the dress to last past her sister's wedding next May.</p></div>
+    <div class="journal-entry"><div class="day">Friday · 01 May MMXXVI</div><div class="photo"><img src="https://images.unsplash.com/photo-1583391733956-6c78276477e2?q=80&w=900&auto=format&fit=crop" alt=""></div><h4>The Lyon silk arrived, finally.</h4><p>Six weeks late. The colour is, as always, slightly different than the swatch — softer, less yellow. I think the wearer will prefer it. I hope so. I have already cut the bodice.</p></div>
+    <div class="journal-entry"><div class="day">Wednesday · 29 April MMXXVI</div><div class="photo"><img src="https://images.unsplash.com/photo-1582142306909-195724d33ffc?q=80&w=900&auto=format&fit=crop" alt=""></div><h4>Hand-rolling thirty-eight inches of hem.</h4><p>The Vesper gown's tulle hem, finished by hand at quarter-inch intervals. Six hours, one needle, no music. It is my favourite kind of working day.</p></div>
+  </div>
+</section>
+
+<section class="newsletter">
+  <div class="eyebrow">— Correspondence</div>
+  <h2>Letters from the Maison</h2>
+  <p>Quarterly notes on cloth, ceremony, and the women we dress. No more than four pages a season.</p>
+  <form onsubmit="event.preventDefault();">
+    <input type="email" placeholder="Your address, in confidence" />
+    <button type="submit">Subscribe</button>
+  </form>
+</section>
+
+</div>
+
+<div class="page page-atelier" data-page="atelier">
+  <div class="page-header">
+    <div class="eyebrow">— A Letter from the Workroom</div>
+    <h1>Nine Years, Two Hands</h1>
+    <p>Queen Mode is a one-woman atelier. Every gown that leaves this studio has been cut, draped, and finished by the same person who wrote this page.</p>
+  </div>
+
+  <section class="atelier-letter">
+    <div class="letter-inner">
+      <div class="letter-portrait">
+        <img src="https://cdn.jsdelivr.net/gh/solomonopoly/muse/image7.jpeg" alt="The designer in her workroom">
+        <div class="portrait-cap">— at the cutting-table, Bloomsbury, March MMXXVI</div>
+      </div>
+      <div class="letter-body">
+        <div class="eyebrow">— From Eleanor</div>
+        <h2>I started in 2017 with a borrowed dressmaker's dummy and a single yard of antique muslin.</h2>
+        <p>The first gown took me eleven weeks. It was for a friend's wedding and it was, frankly, imperfect — the hem was a quarter-inch uneven on the left side, and you can still see it in the photographs if you know where to look. She wore it anyway. She kept it. And I started over the next morning.</p>
+        <p>Nine years later I've drafted around two hundred and forty pieces by hand. I've inherited fourteen patterns from a retiring couturière in Marylebone, photographed every page of an 1889 dressmaker's notebook found at a Sussex estate sale, and learned Lunéville embroidery from a woman in her eighties who still threads from a hooked needle held overhead.</p>
+        <p>I make Victorian-romantic gowns for grown women, and — this is the part most ateliers won't touch — I make them for children too. A communion dress. A flower-girl dress. A christening gown built to be passed down. The patternmaking is the same, the labour is the same, the seriousness is the same. The only difference is the hem.</p>
+        <p class="signoff">Thank you for being here.</p>
+        <div class="heritage-sig">— Eleanor Vance<small>Founder · Première · Sole Pair of Hands</small></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="atelier-numbers">
+    <div class="num-grid">
+      <div class="num-card"><div class="big">9</div><div class="cap">years at the cutting-table</div></div>
+      <div class="num-card"><div class="big">240<span>+</span></div><div class="cap">finished gowns to date</div></div>
+      <div class="num-card"><div class="big">14</div><div class="cap">inherited Victorian patterns</div></div>
+      <div class="num-card"><div class="big">80–240</div><div class="cap">hours per piece, by one pair of hands</div></div>
+    </div>
+  </section>
+
+  <div class="atelier-grid">
+    <div class="atelier-card">
+      <div class="num">i.</div>
+      <h3>The Adult Commission</h3>
+      <p>For brides, mothers-of-the-bride, debutantes, and the woman who simply wants a gown the way her great-grandmother had a gown. Three fittings minimum, four to twelve weeks. Begins with a long conversation over tea.</p>
+    </div>
+    <div class="atelier-card highlight">
+      <div class="num">ii.</div>
+      <h3>The Children's Atelier</h3>
+      <p>The unique work of this studio. Communion dresses, flower-girl dresses, christening gowns intended to be kept and re-worn through three generations. Hand-finished hems with seven inches of growth allowance, hidden buttons children can manage themselves.</p>
+      <span class="badge-rare">— rarely offered elsewhere</span>
+    </div>
+    <div class="atelier-card">
+      <div class="num">iii.</div>
+      <h3>The Restoration</h3>
+      <p>Heirloom gowns brought back from attics and old wardrobes. I work with the cloth I'm given, replacing only what cannot be saved. Four to six months. Expect honest reports about what is and isn't possible.</p>
+    </div>
+  </div>
+
+  <section class="atelier-process">
+    <div class="process-head">
+      <div class="eyebrow">— What a Commission Looks Like</div>
+      <h2>The five visits.</h2>
+    </div>
+    <ol class="process-list">
+      <li><span class="step">i</span><div><h4>The conversation</h4><p>An hour, in person if you're in London or Paris, by video otherwise. We talk about the occasion, the wearer, what they like, what they hate, what they've worn before. I don't take measurements yet.</p></div></li>
+      <li><span class="step">ii</span><div><h4>The cloth</h4><p>I send three to five swatches with notes on what each would do to the silhouette we discussed. You touch them, take a week, choose. A 30% deposit is taken at this stage.</p></div></li>
+      <li><span class="step">iii</span><div><h4>The toile</h4><p>A muslin mock-up of the gown, fitted to your body. We adjust the bodice, mark the hem, decide where the embroidery should fall. I go away and cut the real cloth.</p></div></li>
+      <li><span class="step">iv</span><div><h4>The fitting</h4><p>The gown in cloth, hand-basted, on you. We make whatever changes are needed. This is usually the longest visit. Tea is involved.</p></div></li>
+      <li><span class="step">v</span><div><h4>The unveiling</h4><p>You collect the finished piece, signed and numbered, in a hand-stitched garment bag of unbleached linen. You pay the balance. I write you a letter about the cloth and how to care for it.</p></div></li>
+    </ol>
+  </section>
+
+  <div class="atelier-locations">
+    <div class="location"><h4>The Workroom</h4><div class="city">London</div><div class="addr">14 Fitzroy Square<br>Bloomsbury · By appointment<br>Tuesday through Saturday</div></div>
+    <div class="location"><h4>Paris Fittings</h4><div class="city">Once a Month</div><div class="addr">A borrowed room on rue Saint-Honoré<br>The first weekend of each month<br>By prior appointment only</div></div>
+    <div class="location"><h4>Anywhere Else</h4><div class="city">By Post</div><div class="addr">Children's commissions and restorations<br>can be conducted entirely by post.<br>Write to the studio for the kit.</div></div>
+  </div>
+</div>
+
+<div class="page page-couture" data-page="couture">
+  <div class="page-header">
+    <div class="eyebrow">— The Maison</div>
+    <h1>Couture</h1>
+    <p>Hand-finished pieces of the present collection. Each one drafted, cut, sewn, and signed by the same person — over the course of weeks, sometimes months.</p>
+  </div>
+
+  <section class="commission-band">
+    <div class="commission-inner">
+      <div class="commission-text">
+        <div class="eyebrow">— Honest Pricing</div>
+        <h2>What a piece actually costs to make.</h2>
+        <p>Most ateliers don't tell you. I will. The numbers below are what each tier of work involves — the hours, the cloth, the embroidery — translated into a price. There are no membership fees, no gatekeeping, no reason to hide.</p>
+      </div>
+      <div class="commission-tiers">
+        <div class="tier"><div class="tier-name">The Atelier Piece</div><div class="tier-range">€ 1,400 — 2,400</div><div class="tier-detail">80 to 120 hours · existing pattern · two fittings · finished cloth from my mill list</div></div>
+        <div class="tier highlight-tier"><div class="tier-name">The Bespoke Adult</div><div class="tier-range">€ 4,800 — 9,800</div><div class="tier-detail">140 to 220 hours · pattern drafted to your body · three fittings · embroidery negotiated · cloth of your choosing</div></div>
+        <div class="tier"><div class="tier-name">The Bespoke Child</div><div class="tier-range">€ 1,800 — 4,200</div><div class="tier-detail">60 to 140 hours · pattern with seven inches of growth · two fittings · designed to be passed down</div></div>
+        <div class="tier"><div class="tier-name">The Heirloom Commission</div><div class="tier-range">€ 9,800 — 18,000</div><div class="tier-detail">240 hours and beyond · weddings, debutante balls, occasion gowns · hand embroidery throughout</div></div>
+      </div>
+    </div>
+    <div style="text-align: center; margin-top: 48px;">
+      <button class="commission-cta-btn" data-commission-open>Begin a Commission<span class="arr">→</span></button>
+    </div>
+  </section>
+
+  <div class="couture-section-head">
+    <div class="eyebrow">— The Present Collection</div>
+    <h2>Pieces ready in the workroom now.</h2>
+  </div>
+
+  <div class="gallery">
+    <div class="gallery-item" data-product="Ophelia Gown" data-price="€ 1,840" data-img="https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=1200&auto=format&fit=crop"><img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=900&auto=format&fit=crop" alt=""><div class="label"><h3>Ophelia Gown</h3><small>Silk Chiffon · € 1,840</small></div></div>
+    <div class="gallery-item" data-product="Seraphim Bodice" data-price="€ 2,210" data-img="https://images.unsplash.com/photo-1583391733981-3bdc4dc20ce4?q=80&w=1200&auto=format&fit=crop"><img src="https://images.unsplash.com/photo-1583391733981-3bdc4dc20ce4?q=80&w=900&auto=format&fit=crop" alt=""><div class="label"><h3>Seraphim Bodice</h3><small>Cloth-of-Gold · € 2,210</small></div></div>
+    <div class="gallery-item" data-product="Vesper Velvet" data-price="€ 1,960" data-img="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1200&auto=format&fit=crop"><img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=900&auto=format&fit=crop" alt=""><div class="label"><h3>Vesper Velvet</h3><small>Moss Velvet · € 1,960</small></div></div>
+    <div class="gallery-item" data-product="Rosalind Linen" data-price="€ 1,720" data-img="https://images.unsplash.com/photo-1496440737103-cd596325d314?q=80&w=1200&auto=format&fit=crop"><img src="https://images.unsplash.com/photo-1496440737103-cd596325d314?q=80&w=900&auto=format&fit=crop" alt=""><div class="label"><h3>Rosalind Linen</h3><small>Crushed Rose · € 1,720</small></div></div>
+    <div class="gallery-item" data-product="Cordelia Walking Dress" data-price="€ 1,420" data-img="https://images.unsplash.com/photo-1544022613-e87ca75a784a?q=80&w=1200&auto=format&fit=crop"><img src="https://images.unsplash.com/photo-1544022613-e87ca75a784a?q=80&w=900&auto=format&fit=crop" alt=""><div class="label"><h3>Cordelia Walking Dress</h3><small>Wool · € 1,420</small></div></div>
+    <div class="gallery-item" data-product="Hester Mantle" data-price="€ 2,260" data-img="https://cdn.jsdelivr.net/gh/solomonopoly/muse/433113203_2168712686805046_4284302678100008612_n.jpg"><img src="https://cdn.jsdelivr.net/gh/solomonopoly/muse/433113203_2168712686805046_4284302678100008612_n.jpg" alt=""><div class="label"><h3>Hester Mantle</h3><small>Velvet · € 2,260</small></div></div>
+  </div>
+</div>
+
+<div class="page page-archive" data-page="archive">
+  <div class="page-header">
+    <div class="eyebrow">— Nine Years of Work</div>
+    <h1>The Archive</h1>
+    <p>Not a catalogue. A diary. The pieces below are arranged by the year they were made, with notes on what was happening at the cutting-table and what changed about the work.</p>
+  </div>
+
+  <section class="timeline">
+    <div class="t-row">
+      <div class="t-year">MMXXVI</div>
+      <div class="t-content">
+        <h3>The Riverbank — the present collection.</h3>
+        <p>Forty-eight pieces conceived around the idea of "drowned florals," photographed in the conservatories at Kew. The first collection produced from the new Bloomsbury workroom. Fourteen pieces remain available; the rest are reserved or already gone.</p>
+        <div class="t-images">
+          <div class="t-img" data-product="Ophelia Gown" data-price="€ 1,840" data-img="https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=1200&auto=format&fit=crop"><img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=600&auto=format&fit=crop" alt=""><small>Ophelia · 14 available</small></div>
+          <div class="t-img" data-product="Seraphim Bodice" data-price="€ 2,210" data-img="https://images.unsplash.com/photo-1583391733981-3bdc4dc20ce4?q=80&w=1200&auto=format&fit=crop"><img src="https://images.unsplash.com/photo-1583391733981-3bdc4dc20ce4?q=80&w=600&auto=format&fit=crop" alt=""><small>Seraphim · reserved</small></div>
+          <div class="t-img" data-product="Vesper Velvet" data-price="€ 1,960" data-img="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1200&auto=format&fit=crop"><img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=600&auto=format&fit=crop" alt=""><small>Vesper · 6 available</small></div>
+        </div>
+      </div>
+    </div>
+    <div class="t-row">
+      <div class="t-year">MMXXIV</div>
+      <div class="t-content">
+        <h3>The year I almost stopped.</h3>
+        <p>Six commissions, two restorations, and a great deal of doubt. I made a wedding gown for a woman in Edinburgh that I think might be the best thing I have ever made; I made a christening gown for her sister's child four months later. By December I had decided to keep going.</p>
+        <div class="t-images">
+          <div class="t-img" data-product="The Edinburgh Gown" data-price="€ 8,400 (sold)" data-img="https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?q=80&w=1200&auto=format&fit=crop"><img src="https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?q=80&w=600&auto=format&fit=crop" alt=""><small>The Edinburgh Gown · sold</small></div>
+          <div class="t-img" data-product="The Sister's Christening" data-price="€ 2,200 (sold)" data-img="https://images.unsplash.com/photo-1551803091-e20673f15770?q=80&w=1200&auto=format&fit=crop"><img src="https://images.unsplash.com/photo-1551803091-e20673f15770?q=80&w=600&auto=format&fit=crop" alt=""><small>Christening Gown · sold</small></div>
+        </div>
+      </div>
+    </div>
+    <div class="t-row">
+      <div class="t-year">MMXXII</div>
+      <div class="t-content">
+        <h3>The children's atelier opens.</h3>
+        <p>A mother asked me whether I would make a flower-girl dress to match a wedding gown I was already drafting for her. I said yes, and then I said yes again to the next four mothers who asked. By the end of that year, a third of the workroom's output was for children. I have never marketed it; word travels.</p>
+        <div class="t-images">
+          <div class="t-img" data-product="The First Children's Piece" data-price="€ 1,200 (sold)" data-img="https://images.unsplash.com/photo-1496440737103-cd596325d314?q=80&w=1200&auto=format&fit=crop"><img src="https://images.unsplash.com/photo-1496440737103-cd596325d314?q=80&w=600&auto=format&fit=crop" alt=""><small>The First Flower-Girl · sold</small></div>
+        </div>
+      </div>
+    </div>
+    <div class="t-row">
+      <div class="t-year">MMXX</div>
+      <div class="t-content">
+        <h3>Lockdown. Restorations only.</h3>
+        <p>No fittings possible. I spent the year repairing heirloom gowns sent in by post. Fourteen of them. I learned more in that year than in the three before it. The work taught me how Victorian dressmakers actually solved problems — not from books, but from the seams.</p>
+      </div>
+    </div>
+    <div class="t-row">
+      <div class="t-year">MMXVII</div>
+      <div class="t-content">
+        <h3>The first commission.</h3>
+        <p>A friend's wedding gown. Eleven weeks. A quarter-inch uneven hem on the left side. She wore it. She kept it. I started over the next morning. This is where Queen Mode begins.</p>
+        <div class="t-images">
+          <div class="t-img" data-product="The First Gown" data-price="— archive only" data-img="https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=1200&auto=format&fit=crop"><img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=600&auto=format&fit=crop" alt=""><small>The First Gown · archive only, not for sale</small></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="page page-lookbook" data-page="lookbook">
+  <div class="page-header">
+    <div class="eyebrow">— The Wearers</div>
+    <h1>Lookbook · Vol. III</h1>
+    <p>Four pieces, four people who chose them. Photographed in the rooms where they were worn, on the days they were worn. No models. No retouching. The dresses do enough work on their own.</p>
+  </div>
+
+  <div class="spread">
+    <div class="spread-img"><img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=1200&auto=format&fit=crop" alt=""></div>
+    <div class="spread-text">
+      <div class="num">i.</div>
+      <h3>Mira, 34, on the morning of her wedding.</h3>
+      <p>She had eight months to plan it and asked for a gown her grandmother might recognise. The Ophelia silhouette in pressed muslin and silk chiffon, hand-embroidered cornflower along the hem — she chose cornflower because her grandmother grew them in Gloucestershire in the seventies.</p>
+      <p>The hem moved a quarter-inch through the morning ceremony. We re-pinned it before she walked down the aisle. She told me afterwards that the gown was the only thing she didn't worry about all day.</p>
+      <div class="spread-meta"><span>Ophelia Gown</span><span>·</span><span>€ 4,800 bespoke</span><span>·</span><span>118 hours</span></div>
+    </div>
+  </div>
+
+  <div class="spread flip">
+    <div class="spread-img"><img src="https://images.unsplash.com/photo-1496440737103-cd596325d314?q=80&w=1200&auto=format&fit=crop" alt=""></div>
+    <div class="spread-text">
+      <div class="num">ii.</div>
+      <h3>Eloise, 7, at her older sister's wedding.</h3>
+      <p>This is the work that surprises people. A flower-girl dress in crushed-rose linen, drafted to match the adult wedding gown her sister was wearing — same bodice geometry, same hand-printed botanical, just smaller. Seven inches of growth allowance hidden in the hem so it can be kept and re-worn.</p>
+      <p>Her mother told me that Eloise refused to take it off for two days afterwards. She wore it to the breakfast table. She wore it to the garden. The dress will fit her younger cousin in three years.</p>
+      <div class="spread-meta"><span>The Children's Atelier</span><span>·</span><span>€ 2,200 bespoke</span><span>·</span><span>74 hours</span></div>
+    </div>
+  </div>
+
+  <div class="spread">
+    <div class="spread-img"><img src="https://images.unsplash.com/photo-1583391733981-3bdc4dc20ce4?q=80&w=1200&auto=format&fit=crop" alt=""></div>
+    <div class="spread-text">
+      <div class="num">iii.</div>
+      <h3>Camille, 28, at her debutante ball in Vienna.</h3>
+      <p>The Seraphim bodice in cloth-of-gold over hand-loomed jacquard, drafted from a private 1889 commission found in the archive of a retiring couturière in Marylebone. We took six weeks. She told me she wanted to look like she had stepped out of a photograph her great-grandmother might have posed for.</p>
+      <p>The gown weighs four pounds. She danced for three hours.</p>
+      <div class="spread-meta"><span>Seraphim Bodice</span><span>·</span><span>€ 7,200 bespoke</span><span>·</span><span>184 hours</span></div>
+    </div>
+  </div>
+
+  <div class="spread flip">
+    <div class="spread-img"><img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1200&auto=format&fit=crop" alt=""></div>
+    <div class="spread-text">
+      <div class="num">iv.</div>
+      <h3>Beatrice, 62, restoring her mother's gown for her daughter.</h3>
+      <p>Three generations in one piece of cloth. The original was made in 1961 — a velvet evening gown with a tulle collarette, badly damaged by storage. I worked with what was salvageable: replacing the linings, rebuilding the boning, re-fastening the original mother-of-pearl buttons.</p>
+      <p>Her daughter wore it to her own engagement dinner this March. The bodice is, in places, sixty-five years old. Beatrice cried at the fitting. I will admit I did too.</p>
+      <div class="spread-meta"><span>Restoration Commission</span><span>·</span><span>€ 6,400</span><span>·</span><span>5 months</span></div>
+    </div>
+  </div>
+
+  <div class="lookbook-footer">
+    <div class="eyebrow">— A Note</div>
+    <p>If your story belongs in the next volume, write to the studio. The fifth volume is being photographed in spring MMXXVII; pieces are being commissioned now.</p>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <h3>Queen Mode</h3>
+      <small>est. mmxxv · london</small>
+      <p>Romantic couture in the Victorian tradition, drafted by hand at our Bloomsbury atelier and at our Paris workrooms on rue Saint-Honoré.</p>
+    </div>
+    <div class="footer-col"><h4>The House</h4><ul><li><a href="#">Atelier</a></li><li><a href="#">Heritage</a></li><li><a href="#">The Press</a></li><li><a href="#">Apprenticeships</a></li></ul></div>
+    <div class="footer-col"><h4>Wardrobe</h4><ul><li><a href="#">Daywear</a></li><li><a href="#">Eveningwear</a></li><li><a href="#">Couture</a></li><li><a href="#">Archive Pieces</a></li></ul></div>
+    <div class="footer-col"><h4>Service</h4><ul><li><a href="#">Bespoke Fittings</a></li><li><a href="#">Atelier Shipping</a></li><li><a href="#">Care &amp; Restoration</a></li><li><a href="#">Correspondence</a></li></ul></div>
+  </div>
+  <div class="footer-bottom">
+    <span>© MMXXVI · Queen Mode. All rights reserved.</span>
+    <div class="socials"><a href="#">Instagram</a><a href="#">Pinterest</a><a href="#">Journal</a></div>
+  </div>
+</footer>
+
+<aside class="mobile-drawer" id="mobileDrawer">
+  <div class="links">
+    <a href="#" data-page="home"><span>i.</span>Home</a>
+    <a href="#" data-page="atelier"><span>ii.</span>Atelier</a>
+    <a href="#" data-page="couture"><span>iii.</span>Couture</a>
+    <a href="#" data-page="archive"><span>iv.</span>Archive</a>
+    <a href="#" data-page="lookbook"><span>v.</span>Lookbook</a>
+  </div>
+  <div class="footer-strip">— Queen Mode · MMXXVI</div>
+</aside>
+
+<aside class="cart-drawer" id="cartDrawer">
+  <div class="cart-head">
+    <h3>Vitrine</h3>
+    <button class="cart-close" id="cartClose" aria-label="Close cart">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <div class="cart-item">
+      <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=400&auto=format&fit=crop" alt="">
+      <div><div class="name">Ophelia Gown</div><div class="det">Size 36 · Bone</div><div class="price">€ 1,840</div></div>
+      <button class="remove">Remove</button>
+    </div>
+    <div class="cart-item">
+      <img src="https://images.unsplash.com/photo-1583391733981-3bdc4dc20ce4?q=80&w=400&auto=format&fit=crop" alt="">
+      <div><div class="name">Seraphim Bodice</div><div class="det">Size 38 · Gilt</div><div class="price">€ 2,210</div></div>
+      <button class="remove">Remove</button>
+    </div>
+  </div>
+  <div class="cart-foot">
+    <div class="cart-total"><span>Subtotal</span><strong>€ 4,050</strong></div>
+    <button class="cart-checkout">Proceed to fitting</button>
+  </div>
+</aside>
+
+<div class="scrim" id="scrim"></div>
+
+<div class="modal" id="modal">
+  <div class="modal-back"></div>
+  <div class="modal-card">
+    <button class="modal-close" id="modalClose" aria-label="Close">✕</button>
+    <div class="modal-img"><img id="modalImg" src="" alt=""></div>
+    <div class="modal-body">
+      <div class="eyebrow">— Couture Piece</div>
+      <h2 id="modalTitle">Ophelia Gown</h2>
+      <div class="pri" id="modalPrice">€ 1,840</div>
+      <p>Hand-embroidered silk chiffon, drafted from the 1873 archive. Each piece numbered, signed by the première, and finished to the wearer's measurements over four to six weeks.</p>
+      <button class="add">Add to vitrine</button>
+    </div>
+  </div>
+</div>
+
+<div class="search-overlay" id="searchOverlay">
+  <div class="search-head">
+    <span class="logo">Queen Mode</span>
+    <button class="search-close" id="searchClose">Close · ESC</button>
+  </div>
+  <div class="search-input-wrap">
+    <input type="text" id="searchInput" placeholder="Type a name, a fabric, an occasion…" autocomplete="off">
+  </div>
+  <div class="search-results">
+    <div class="search-suggestions">
+      <span data-q="ophelia">Ophelia</span><span data-q="seraphim">Seraphim</span><span data-q="vesper">Vesper</span><span data-q="rosalind">Rosalind</span>
+      <span data-q="children">Children's atelier</span><span data-q="wedding">Wedding gowns</span><span data-q="restoration">Restorations</span><span data-q="velvet">Velvet</span>
+    </div>
+    <div class="search-results-list" id="searchResultsList"></div>
+  </div>
+</div>
+
+<div class="account-modal" id="accountModal">
+  <div class="modal-back"></div>
+  <div class="account-card">
+    <button class="modal-close" data-account-close>✕</button>
+    <h2>The Atelier</h2>
+    <p>Track your commission's progress, view your toiles, and message the studio. Accounts are issued to active commissioners only.</p>
+    <input type="email" placeholder="Your address, in confidence">
+    <div class="actions">
+      <button>Sign In</button>
+      <button class="request" type="button" data-commission-open>I'd like to begin a commission →</button>
+    </div>
+  </div>
+</div>
+
+<div class="commission-modal" id="commissionModal">
+  <div class="modal-back"></div>
+  <div class="commission-card">
+    <button class="commission-close" id="commissionClose" aria-label="Close">✕</button>
+    <div class="commission-progress"><span class="current"></span><span></span><span></span><span></span><span></span></div>
+
+    <div class="commission-step active" data-step="1">
+      <div class="eyebrow">— Step One of Five</div>
+      <h2>Who is the gown for?</h2>
+      <p class="help">Adult and children's commissions follow different patterns and timelines.</p>
+      <div class="choice-grid">
+        <button class="choice" data-field="for" data-value="adult"><strong>For an adult</strong><small>4 to 12 weeks · 80–240 hours</small></button>
+        <button class="choice" data-field="for" data-value="child"><strong>For a child</strong><small>2 to 8 weeks · 60–140 hours · growth allowance</small></button>
+        <button class="choice" data-field="for" data-value="restoration"><strong>A restoration</strong><small>Heirloom · 4 to 6 months</small></button>
+        <button class="choice" data-field="for" data-value="other"><strong>I'm not sure yet</strong><small>We'll talk it through</small></button>
+      </div>
+      <div class="commission-nav"><span></span><button class="commission-next-btn" data-step-next disabled>Next →</button></div>
+    </div>
+
+    <div class="commission-step" data-step="2">
+      <div class="eyebrow">— Step Two of Five</div>
+      <h2>What is the occasion?</h2>
+      <p class="help">If your occasion isn't here, the last option works fine.</p>
+      <div class="choice-grid">
+        <button class="choice" data-field="occasion" data-value="wedding"><strong>Wedding</strong><small>Bride or wedding-party</small></button>
+        <button class="choice" data-field="occasion" data-value="ball"><strong>Ball or gala</strong><small>Debutante, charity, society</small></button>
+        <button class="choice" data-field="occasion" data-value="ceremony"><strong>Ceremony</strong><small>Christening, communion, confirmation</small></button>
+        <button class="choice" data-field="occasion" data-value="everyday"><strong>For her wardrobe</strong><small>No specific date</small></button>
+      </div>
+      <div class="commission-nav"><button class="commission-back-btn" data-step-back>← Back</button><button class="commission-next-btn" data-step-next disabled>Next →</button></div>
+    </div>
+
+    <div class="commission-step" data-step="3">
+      <div class="eyebrow">— Step Three of Five</div>
+      <h2>And the budget?</h2>
+      <p class="help">An honest range so I can suggest the right tier of work. The numbers below correspond to the time the piece will actually take.</p>
+      <div class="choice-grid">
+        <button class="choice" data-field="budget" data-value="atelier"><strong>€ 1,400 — 2,400</strong><small>Atelier piece · existing pattern</small></button>
+        <button class="choice" data-field="budget" data-value="children"><strong>€ 1,800 — 4,200</strong><small>Bespoke child</small></button>
+        <button class="choice" data-field="budget" data-value="bespoke"><strong>€ 4,800 — 9,800</strong><small>Bespoke adult</small></button>
+        <button class="choice" data-field="budget" data-value="heirloom"><strong>€ 9,800+</strong><small>Heirloom commission</small></button>
+      </div>
+      <div class="commission-nav"><button class="commission-back-btn" data-step-back>← Back</button><button class="commission-next-btn" data-step-next disabled>Next →</button></div>
+    </div>
+
+    <div class="commission-step" data-step="4">
+      <div class="eyebrow">— Step Four of Five</div>
+      <h2>Tell me about it.</h2>
+      <p class="help">A sentence is enough. Anything you want me to know — a date, a person, a memory, a fabric.</p>
+      <label>The date the gown is needed</label>
+      <input type="date" data-field="date">
+      <label>What you'd like me to know</label>
+      <textarea data-field="notes" placeholder="My grandmother's wedding gown was cornflower blue. I'd love something that nods to that without being a copy…"></textarea>
+      <div class="commission-nav"><button class="commission-back-btn" data-step-back>← Back</button><button class="commission-next-btn" data-step-next>Next →</button></div>
+    </div>
+
+    <div class="commission-step" data-step="5">
+      <div class="eyebrow">— Step Five of Five</div>
+      <h2>How do I write back to you?</h2>
+      <p class="help">I write to every enquiry personally, usually within forty-eight hours. — E.</p>
+      <label>Your name</label>
+      <input type="text" data-field="name" placeholder="Beatrice Vance">
+      <label>Your email</label>
+      <input type="email" data-field="email" placeholder="beatrice@example.com">
+      <label>City</label>
+      <input type="text" data-field="city" placeholder="London, Sydney, Vienna…">
+      <div class="commission-nav"><button class="commission-back-btn" data-step-back>← Back</button><button class="commission-next-btn" id="commissionSubmit" disabled>Send to the studio</button></div>
+    </div>
+
+    <div class="commission-step" data-step="6">
+      <div class="commission-thanks">
+        <div class="gilt-mark">❦</div>
+        <h2>Thank you.</h2>
+        <p>Your enquiry has reached the studio. I will write back to you, by hand and from the cutting-table, within forty-eight hours. — Eleanor</p>
+        <button class="commission-back-btn" id="commissionDone">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-dot" id="cursorDot"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+
+    // ---------- Swiper ----------
+    if (typeof Swiper !== 'undefined') {
+      const swiper = new Swiper('.heroSwiper', {
+        effect: 'fade',
+        fadeEffect: { crossFade: true },
+        speed: 900,
+        loop: true,
+        navigation: { nextEl: '.swiper-btn.next', prevEl: '.swiper-btn.prev' },
+        pagination: {
+          el: '.hero-pagination',
+          type: 'fraction',
+          renderFraction: (currentClass, totalClass) =>
+            `<span class="${currentClass}"></span><span class="sep">/</span><span class="${totalClass}"></span>`
+        },
+        autoplay: { delay: 6500, disableOnInteraction: false },
+      });
+      swiper.on('slideChange', function () {
+        document.body.setAttribute('data-sld', swiper.realIndex);
+      });
+    }
+
+    const pages = document.querySelectorAll('.page');
+    const navLinks = document.querySelectorAll('[data-page]');
+
+    function goTo(name){
+      const target = document.querySelector(`.page[data-page="${name}"]`);
+      if (!target) return;
+      pages.forEach(p => p.classList.remove('active'));
+      target.classList.add('active');
+      document.querySelectorAll('.nav-link').forEach(l => {
+        l.classList.toggle('active-link', l.getAttribute('data-page') === name);
+      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      closeAllDrawers();
+      requestAnimationFrame(initReveal);
+    }
+
+    navLinks.forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        goTo(link.getAttribute('data-page'));
+      });
+    });
+
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileDrawer = document.getElementById('mobileDrawer');
+    const scrim = document.getElementById('scrim');
+
+    function openMobile(){
+      mobileDrawer.classList.add('open');
+      scrim.classList.add('open');
+      document.body.classList.add('drawer-open');
+    }
+    function closeMobile(){
+      mobileDrawer.classList.remove('open');
+      document.body.classList.remove('drawer-open');
+      if (!cartDrawer.classList.contains('open')) scrim.classList.remove('open');
+    }
+    menuToggle && menuToggle.addEventListener('click', () => {
+      mobileDrawer.classList.contains('open') ? closeMobile() : openMobile();
+    });
+
+    const cartOpen = document.getElementById('cartOpen');
+    const cartClose = document.getElementById('cartClose');
+    const cartDrawer = document.getElementById('cartDrawer');
+
+    function openCart(){
+      cartDrawer.classList.add('open');
+      scrim.classList.add('open');
+    }
+    function closeCart(){
+      cartDrawer.classList.remove('open');
+      if (!mobileDrawer.classList.contains('open')) scrim.classList.remove('open');
+    }
+    cartOpen && cartOpen.addEventListener('click', openCart);
+    cartClose && cartClose.addEventListener('click', closeCart);
+
+    function closeAllDrawers(){
+      closeMobile();
+      closeCart();
+      scrim.classList.remove('open');
+    }
+    scrim.addEventListener('click', closeAllDrawers);
+
+    // Cart — delegated remove + live subtotal
+    const cartItemsEl = document.getElementById('cartItems');
+    function updateCartUI(){
+      const items = cartItemsEl.querySelectorAll('.cart-item');
+      document.querySelector('.cart-pill .count').textContent = items.length;
+      let total = 0;
+      items.forEach(it => total += parseInt(it.querySelector('.price').textContent.replace(/[^\d]/g,''), 10) || 0);
+      document.querySelector('.cart-total strong').textContent = '€ ' + total.toLocaleString('en-GB');
+    }
+    cartItemsEl.addEventListener('click', e => {
+      if (e.target.classList.contains('remove')){
+        e.target.closest('.cart-item').remove();
+        updateCartUI();
+      }
+    });
+
+    const modal = document.getElementById('modal');
+    const modalClose = document.getElementById('modalClose');
+    const modalImg = document.getElementById('modalImg');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalPrice = document.getElementById('modalPrice');
+
+    function openModal(name, price, img){
+      modalTitle.textContent = name;
+      modalPrice.textContent = price;
+      modalImg.src = img;
+      modal.classList.add('open');
+    }
+    modalClose.addEventListener('click', () => modal.classList.remove('open'));
+    modal.querySelector('.modal-back').addEventListener('click', () => modal.classList.remove('open'));
+
+    document.querySelectorAll('.featured-grid .product').forEach(prod => {
+      const name  = prod.querySelector('h3').textContent;
+      const price = prod.querySelector('.price').textContent;
+      const img   = prod.querySelector('img').src;
+      prod.addEventListener('click', () => openModal(name, price, img));
+    });
+    document.querySelectorAll('.gallery-item, .t-img').forEach(item => {
+      item.addEventListener('click', () => {
+        openModal(
+          item.dataset.product || (item.querySelector('h3') && item.querySelector('h3').textContent) || 'Piece',
+          item.dataset.price   || '€ —',
+          item.dataset.img     || item.querySelector('img').src
+        );
+      });
+    });
+
+    // SEARCH OVERLAY
+    const searchOverlay = document.getElementById('searchOverlay');
+    const searchInput = document.getElementById('searchInput');
+    const searchResultsList = document.getElementById('searchResultsList');
+    const catalogue = [
+      { name:'Ophelia Gown', cat:'Silk Chiffon · € 1,840', price:'€ 1,840', img:'https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=900&auto=format&fit=crop', k:'ophelia silk chiffon wedding gown riverbank bespoke' },
+      { name:'Seraphim Bodice', cat:'Cloth-of-Gold · € 2,210', price:'€ 2,210', img:'https://images.unsplash.com/photo-1583391733981-3bdc4dc20ce4?q=80&w=900&auto=format&fit=crop', k:'seraphim gold brocade ball evening cathedral' },
+      { name:'Vesper Velvet', cat:'Moss Velvet · € 1,960', price:'€ 1,960', img:'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=900&auto=format&fit=crop', k:'vesper velvet moss evening tulle glasshouse' },
+      { name:'Rosalind Linen', cat:'Crushed Rose · € 1,720', price:'€ 1,720', img:'https://images.unsplash.com/photo-1496440737103-cd596325d314?q=80&w=900&auto=format&fit=crop', k:'rosalind linen rose afternoon day garden' },
+      { name:'Cordelia Walking Dress', cat:'Wool · € 1,420', price:'€ 1,420', img:'https://images.unsplash.com/photo-1544022613-e87ca75a784a?q=80&w=900&auto=format&fit=crop', k:'cordelia wool daywear walking bone' },
+      { name:'Belladonna Bodice', cat:'Silk · € 980', price:'€ 980', img:'https://images.unsplash.com/photo-1566174053879-31528523f8ae?q=80&w=900&auto=format&fit=crop', k:'belladonna silk bodice hand-laced evening' },
+      { name:'Hester Mantle', cat:'Velvet · € 2,260', price:'€ 2,260', img:'https://cdn.jsdelivr.net/gh/solomonopoly/muse/433113203_2168712686805046_4284302678100008612_n.jpg', k:'hester velvet mantle gold cord outerwear archive' },
+      { name:'Aurelia Tea Gown', cat:'Linen · € 1,180', price:'€ 1,180', img:'https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?q=80&w=900&auto=format&fit=crop', k:'aurelia linen hand-printed tea gown day' },
+      { name:"The Children's Atelier", cat:'Bespoke · from € 1,800', price:'from € 1,800', img:'https://images.unsplash.com/photo-1496440737103-cd596325d314?q=80&w=900&auto=format&fit=crop', k:'children child flower-girl communion christening heirloom' },
+      { name:'Restoration Commission', cat:'Heirloom · from € 6,400', price:'from € 6,400', img:'https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=900&auto=format&fit=crop', k:'restoration heirloom repair wedding attic velvet' }
+    ];
+    function renderSearch(q){
+      q = (q || '').trim().toLowerCase();
+      const hits = q ? catalogue.filter(p => (p.name + ' ' + p.k).toLowerCase().includes(q)) : catalogue.slice(0, 6);
+      searchResultsList.innerHTML = hits.length
+        ? hits.map(p => `<a class="search-result" data-i="${catalogue.indexOf(p)}">
+            <img src="${p.img}" alt=""><h4>${p.name}</h4><span>${p.cat}</span></a>`).join('')
+        : '<div class="search-empty">Nothing by that name in the workroom — try a fabric, an occasion, or write to the studio.</div>';
+    }
+    document.getElementById('searchOpen').addEventListener('click', () => {
+      searchOverlay.classList.add('open');
+      renderSearch('');
+      setTimeout(() => searchInput.focus(), 60);
+    });
+    document.getElementById('searchClose').addEventListener('click', () => searchOverlay.classList.remove('open'));
+    searchInput.addEventListener('input', () => renderSearch(searchInput.value));
+    document.querySelectorAll('.search-suggestions span').forEach(s =>
+      s.addEventListener('click', () => { searchInput.value = s.dataset.q; renderSearch(s.dataset.q); }));
+    searchResultsList.addEventListener('click', e => {
+      const r = e.target.closest('.search-result'); if (!r) return;
+      const p = catalogue[+r.dataset.i];
+      searchOverlay.classList.remove('open');
+      openModal(p.name, p.price, p.img);
+    });
+
+    // ACCOUNT MODAL
+    const accountModal = document.getElementById('accountModal');
+    document.getElementById('accountOpen').addEventListener('click', () => accountModal.classList.add('open'));
+    accountModal.querySelector('[data-account-close]').addEventListener('click', () => accountModal.classList.remove('open'));
+    accountModal.querySelector('.modal-back').addEventListener('click', () => accountModal.classList.remove('open'));
+
+    // COMMISSION FLOW
+    const commissionModal = document.getElementById('commissionModal');
+    const cSteps = commissionModal.querySelectorAll('.commission-step');
+    const cBars  = commissionModal.querySelectorAll('.commission-progress span');
+    const cData  = {};
+    let cStep = 1;
+    function cShow(n){
+      cStep = n;
+      cSteps.forEach(s => s.classList.toggle('active', +s.dataset.step === n));
+      cBars.forEach((b, i) => {
+        b.classList.toggle('done', i < n - 1);
+        b.classList.toggle('current', i === n - 1);
+      });
+    }
+    function cOpen(){ commissionModal.classList.add('open'); cShow(1); }
+    function cClose(){ commissionModal.classList.remove('open'); }
+    document.querySelectorAll('#commissionOpen1, [data-commission-open]').forEach(b =>
+      b.addEventListener('click', e => { e.preventDefault(); accountModal.classList.remove('open'); cOpen(); }));
+    document.getElementById('commissionClose').addEventListener('click', cClose);
+    document.getElementById('commissionDone').addEventListener('click', cClose);
+    commissionModal.querySelector('.modal-back').addEventListener('click', cClose);
+
+    commissionModal.querySelectorAll('.choice').forEach(ch => {
+      ch.addEventListener('click', () => {
+        const step = ch.closest('.commission-step');
+        step.querySelectorAll('.choice').forEach(c => c.classList.remove('selected'));
+        ch.classList.add('selected');
+        cData[ch.dataset.field] = ch.dataset.value;
+        const next = step.querySelector('[data-step-next]');
+        if (next) next.disabled = false;
+      });
+    });
+    commissionModal.querySelectorAll('[data-step-next]').forEach(b => b.addEventListener('click', () => cShow(cStep + 1)));
+    commissionModal.querySelectorAll('[data-step-back]').forEach(b => b.addEventListener('click', () => cShow(cStep - 1)));
+
+    const cName = commissionModal.querySelector('[data-field="name"]');
+    const cEmail = commissionModal.querySelector('[data-field="email"]');
+    const cSubmit = document.getElementById('commissionSubmit');
+    function cValidate(){ cSubmit.disabled = !(cName.value.trim() && /.+@.+\..+/.test(cEmail.value)); }
+    [cName, cEmail].forEach(i => i.addEventListener('input', cValidate));
+    cSubmit.addEventListener('click', () => {
+      ['date', 'notes', 'city'].forEach(f => {
+        const el = commissionModal.querySelector(`[data-field="${f}"]`);
+        if (el) cData[f] = el.value;
+      });
+      cData.name = cName.value.trim();
+      cData.email = cEmail.value.trim();
+      console.log('Commission enquiry →', cData);
+      cShow(6);
+    });
+
+    // WISHLIST HEARTS
+    document.querySelectorAll('.product .frame, .gallery-item').forEach(fr => {
+      const b = document.createElement('button');
+      b.className = 'wish';
+      b.setAttribute('aria-label', 'Save to wishlist');
+      b.innerHTML = '<svg viewBox="0 0 24 24"><path d="M12 21C7.2 16.8 3 13.3 3 9a4.8 4.8 0 0 1 8.4-3.2l.6.6.6-.6A4.8 4.8 0 0 1 21 9c0 4.3-4.2 7.8-9 12z"/></svg>';
+      b.addEventListener('click', e => { e.stopPropagation(); b.classList.toggle('saved'); });
+      fr.appendChild(b);
+    });
+
+    // ADD TO VITRINE
+    document.querySelector('#modal .add').addEventListener('click', () => {
+      const item = document.createElement('div');
+      item.className = 'cart-item';
+      item.innerHTML = `<img src="${modalImg.src}" alt="">
+        <div><div class="name">${modalTitle.textContent}</div>
+        <div class="det">Made to measure</div>
+        <div class="price">${modalPrice.textContent}</div></div>
+        <button class="remove">Remove</button>`;
+      cartItemsEl.appendChild(item);
+      updateCartUI();
+      modal.classList.remove('open');
+      openCart();
+    });
+
+    // NEWSLETTER FEEDBACK
+    const nlForm = document.querySelector('.newsletter form');
+    nlForm.addEventListener('submit', e => {
+      e.preventDefault();
+      const btn = nlForm.querySelector('button');
+      const email = nlForm.querySelector('input');
+      if (!/.+@.+\..+/.test(email.value)) { email.focus(); return; }
+      btn.textContent = 'Received ❦';
+      email.value = '';
+      setTimeout(() => (btn.textContent = 'Subscribe'), 3200);
+    });
+
+    // ESC closes all overlays
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape'){
+        modal.classList.remove('open');
+        searchOverlay.classList.remove('open');
+        accountModal.classList.remove('open');
+        commissionModal.classList.remove('open');
+        closeAllDrawers();
+      }
+    });
+
+    const cursor = document.getElementById('cursor');
+    const cursorDot = document.getElementById('cursorDot');
+    const isDesktop = window.matchMedia('(hover: hover) and (min-width: 900px)').matches;
+    if (isDesktop && cursor && cursorDot){
+      let mx = 0, my = 0, cx = 0, cy = 0;
+      window.addEventListener('mousemove', e => {
+        mx = e.clientX; my = e.clientY;
+        cursorDot.style.transform = `translate(${mx}px, ${my}px) translate(-50%, -50%)`;
+      });
+      function loop(){
+        cx += (mx - cx) * 0.18;
+        cy += (my - cy) * 0.18;
+        cursor.style.transform = `translate(${cx}px, ${cy}px) translate(-50%, -50%)`;
+        requestAnimationFrame(loop);
+      }
+      loop();
+      document.querySelectorAll('a, button, .product, .gallery-item, .swiper-btn, .arrival-card, .menu-toggle, .nav-icon, .nav-logo, .cart-pill, [data-page]').forEach(el => {
+        el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+        el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+      });
+    }
+
+    function initReveal(){
+      document.querySelectorAll('.page.active section:not(.hero), .page.active .gallery-item, .page.active .atelier-card, .page.active .spread, .page.active .location, .page.active .num-card, .page.active .tier, .page.active .t-row, .page.active .process-list li').forEach(el => {
+        if (!el.classList.contains('reveal')) el.classList.add('reveal');
+      });
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting){
+            entry.target.classList.add('in');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+      document.querySelectorAll('.reveal:not(.in)').forEach(el => io.observe(el));
+    }
+    initReveal();
+
+  });
+</script>
+
+</body>
+</html>
